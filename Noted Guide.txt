@@ -1,0 +1,3 @@
+[Start]
+ [!] Jalankan melalui 'LoginPage' pada folder 'Aa_MainFrame_ReSource'.
+ [!] Running from 'LoginPage' at 'Aa_MainFrame_ReSource'.
