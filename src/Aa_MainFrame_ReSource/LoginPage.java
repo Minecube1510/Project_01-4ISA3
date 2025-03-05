@@ -515,7 +515,7 @@ public class LoginPage extends javax.swing.JFrame {
         }
 
         // Validasi panjang nomor telepon
-        else if (telphone.length() != 10) {
+        else if (telphone.length() < 10) {
             JOptionPane.showMessageDialog(this,
                     "Phone Number must than 10 digits!",
                     "Unidentified Phone Number",
