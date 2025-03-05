@@ -235,9 +235,9 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         sigPaid = new javax.swing.JLabel();
         panelPilih = new javax.swing.JScrollPane();
         antaraPilih = new javax.swing.JList<>();
+        lookaTon1 = new javax.swing.JButton();
         skrolTabel = new javax.swing.JScrollPane();
         isiDataan = new javax.swing.JTable();
-        lookaTon1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -361,11 +361,24 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         antaraPilih.setPreferredSize(new java.awt.Dimension(90, 67));
         panelPilih.setViewportView(antaraPilih);
 
-        skrolTabel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        skrolTabel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        skrolTabel.setMaximumSize(new java.awt.Dimension(570, 250));
-        skrolTabel.setMinimumSize(new java.awt.Dimension(570, 250));
-        skrolTabel.setPreferredSize(new java.awt.Dimension(570, 250));
+        lookaTon1.setBackground(new java.awt.Color(102, 102, 102));
+        lookaTon1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 30)); // NOI18N
+        lookaTon1.setForeground(new java.awt.Color(204, 204, 204));
+        lookaTon1.setText("Completion");
+        lookaTon1.setToolTipText("");
+        lookaTon1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lookaTon1.setMaximumSize(new java.awt.Dimension(100, 30));
+        lookaTon1.setMinimumSize(new java.awt.Dimension(100, 30));
+        lookaTon1.setPreferredSize(new java.awt.Dimension(100, 30));
+        lookaTon1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lookaTon1ActionPerformed(evt);
+            }
+        });
+
+        skrolTabel.setMaximumSize(new java.awt.Dimension(570, 285));
+        skrolTabel.setMinimumSize(new java.awt.Dimension(570, 285));
+        skrolTabel.setPreferredSize(new java.awt.Dimension(570, 285));
 
         isiDataan.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         isiDataan.setModel(new javax.swing.table.DefaultTableModel(
@@ -474,26 +487,11 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                 "Name", "Order", "Quantity", "Total Price", "Status"
             }
         ));
-        isiDataan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        isiDataan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         isiDataan.setMaximumSize(new java.awt.Dimension(750, 600));
         isiDataan.setMinimumSize(new java.awt.Dimension(750, 600));
         isiDataan.setPreferredSize(new java.awt.Dimension(750, 600));
         skrolTabel.setViewportView(isiDataan);
-
-        lookaTon1.setBackground(new java.awt.Color(102, 102, 102));
-        lookaTon1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 32)); // NOI18N
-        lookaTon1.setForeground(new java.awt.Color(204, 204, 204));
-        lookaTon1.setText("Payment");
-        lookaTon1.setToolTipText("");
-        lookaTon1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        lookaTon1.setMaximumSize(new java.awt.Dimension(100, 30));
-        lookaTon1.setMinimumSize(new java.awt.Dimension(100, 30));
-        lookaTon1.setPreferredSize(new java.awt.Dimension(100, 30));
-        lookaTon1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lookaTon1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout bekgronTabelLayout = new javax.swing.GroupLayout(bekgronTabel);
         bekgronTabel.setLayout(bekgronTabelLayout);
@@ -502,7 +500,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
             .addGroup(bekgronTabelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(skrolTabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(skrolTabel, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                     .addGroup(bekgronTabelLayout.createSequentialGroup()
                         .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bekgronTabelLayout.createSequentialGroup()
@@ -521,13 +519,13 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                                         .addComponent(sigPaid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(enterCari, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(enterNumb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bekgronTabelLayout.createSequentialGroup()
                                 .addComponent(panelPilih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lookaTon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                                .addComponent(lookaTon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(enterNumb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         bekgronTabelLayout.setVerticalGroup(
             bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -550,8 +548,8 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                     .addComponent(panelPilih, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lookaTon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(skrolTabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addComponent(skrolTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(58, 58, 58))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
