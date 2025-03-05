@@ -102,6 +102,7 @@ public class AdminDashboardPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        skrolAtmin = new javax.swing.JScrollPane();
         bekgronServis = new javax.swing.JPanel();
         judulServis = new javax.swing.JPanel();
         judulAtas = new javax.swing.JLabel();
@@ -120,21 +121,24 @@ public class AdminDashboardPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
-        setMaximumSize(new java.awt.Dimension(800, 500));
-        setMinimumSize(new java.awt.Dimension(800, 500));
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 500));
-        setResizable(false);
+        setMaximumSize(new java.awt.Dimension(850, 600));
+        setMinimumSize(new java.awt.Dimension(850, 600));
+        setPreferredSize(new java.awt.Dimension(850, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
+        skrolAtmin.setMaximumSize(new java.awt.Dimension(800, 500));
+        skrolAtmin.setMinimumSize(new java.awt.Dimension(800, 500));
+        skrolAtmin.setPreferredSize(new java.awt.Dimension(800, 500));
+
         bekgronServis.setBackground(new java.awt.Color(51, 51, 51));
         bekgronServis.setToolTipText("");
         bekgronServis.setMaximumSize(new java.awt.Dimension(800, 500));
         bekgronServis.setMinimumSize(new java.awt.Dimension(800, 500));
+        bekgronServis.setPreferredSize(new java.awt.Dimension(800, 500));
 
         judulServis.setBackground(new java.awt.Color(51, 153, 0));
         judulServis.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 0, 0)));
@@ -262,7 +266,7 @@ public class AdminDashboardPage extends javax.swing.JFrame {
                 .addGroup(kendaliServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(welKom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pengGuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addGroup(kendaliServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tomboLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tubuTompol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -389,7 +393,7 @@ public class AdminDashboardPage extends javax.swing.JFrame {
                 .addComponent(optingStuffs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optingPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
 
         optingLiatin.getAccessibleContext().setAccessibleName("Overview Button");
@@ -404,19 +408,19 @@ public class AdminDashboardPage extends javax.swing.JFrame {
         liatServis.setBackground(new java.awt.Color(255, 0, 0));
         liatServis.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 0, 0)));
         liatServis.setToolTipText("");
-        liatServis.setMaximumSize(new java.awt.Dimension(565, 344));
-        liatServis.setMinimumSize(new java.awt.Dimension(565, 344));
+        liatServis.setMaximumSize(new java.awt.Dimension(620, 470));
+        liatServis.setMinimumSize(new java.awt.Dimension(620, 470));
         liatServis.setName("ObservePane"); // NOI18N
 
         javax.swing.GroupLayout liatServisLayout = new javax.swing.GroupLayout(liatServis);
         liatServis.setLayout(liatServisLayout);
         liatServisLayout.setHorizontalGroup(
             liatServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
         liatServisLayout.setVerticalGroup(
             liatServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 476, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout bekgronServisLayout = new javax.swing.GroupLayout(bekgronServis);
@@ -429,7 +433,7 @@ public class AdminDashboardPage extends javax.swing.JFrame {
                     .addGroup(bekgronServisLayout.createSequentialGroup()
                         .addComponent(judulServis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kendaliServis, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE))
+                        .addComponent(kendaliServis, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE))
                     .addGroup(bekgronServisLayout.createSequentialGroup()
                         .addComponent(opsiKeServis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -445,7 +449,7 @@ public class AdminDashboardPage extends javax.swing.JFrame {
                     .addComponent(judulServis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bekgronServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opsiKeServis, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                    .addComponent(opsiKeServis, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addComponent(liatServis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -459,19 +463,30 @@ public class AdminDashboardPage extends javax.swing.JFrame {
         liatServis.getAccessibleContext().setAccessibleName("Observe Panel");
         liatServis.getAccessibleContext().setAccessibleDescription("Observing of Service");
 
+        skrolAtmin.setViewportView(bekgronServis);
+        bekgronServis.getAccessibleContext().setAccessibleName("Main Layer Background");
+        bekgronServis.getAccessibleContext().setAccessibleDescription("As Frame's Background");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronServis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 850, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(skrolAtmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronServis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, 0)
+                    .addComponent(skrolAtmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGap(0, 0, 0)))
         );
-
-        bekgronServis.getAccessibleContext().setAccessibleName("Main Layer Background");
-        bekgronServis.getAccessibleContext().setAccessibleDescription("As Frame's Background");
 
         getAccessibleContext().setAccessibleDescription("Admin Dashboard");
         getAccessibleContext().setAccessibleParent(this);
@@ -946,6 +961,7 @@ public class AdminDashboardPage extends javax.swing.JFrame {
     private javax.swing.JButton optingPesanan;
     private javax.swing.JButton optingStuffs;
     private javax.swing.JLabel pengGuna;
+    private javax.swing.JScrollPane skrolAtmin;
     private javax.swing.JButton tomboLogOut;
     private javax.swing.JButton tubuTompol;
     private javax.swing.JLabel welKom;

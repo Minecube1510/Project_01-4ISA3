@@ -64,7 +64,7 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
 
         // Editing Header Table
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "Name", "Description", "Category", "Price"}, 0) {
+            "ID", "Name", "Description", "Category", "Stock", "Price"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Tidak dapat diedit
@@ -123,7 +123,7 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI liatkan = (BasicInternalFrameUI)this.getUI();
-        liatkan.setNorthPane(null);
+        //liatkan.setNorthPane(null);
         
         //
     }
@@ -143,8 +143,7 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         /* Permulaan */
         DefaultTableModel keMeja = (DefaultTableModel)isiDataan.getModel();
         keMeja.setRowCount(0);
-        String kueri01 = "SELECT * FROM " +
-                         "product";  // Kolom dan Index-nya
+        String kueri01 = "SELECT * FROM product";  // Kolom dan Index-nya
         /* Permulaan */
 
         /* Sistematis */
@@ -159,9 +158,10 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
                 String barang = hasiRiset.getString("pro_name");
                 String deskrip = hasiRiset.getString("pro_desc");
                 String ketgo = hasiRiset.getString("category");
+                int stock = hasiRiset.getInt("stock");
                 int harga = hasiRiset.getInt("price");
                 //
-                keMeja.addRow(new Object[]{aidi, barang, deskrip, ketgo, harga});
+                keMeja.addRow(new Object[]{aidi, barang, deskrip, ketgo, stock, harga});
                 rowCount++; // Increment jumlah baris
             }
 
@@ -194,28 +194,34 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         deleTon = new javax.swing.JButton();
         sigproName = new javax.swing.JLabel();
         enterProname = new javax.swing.JTextField();
-        enterDescs = new javax.swing.JTextField();
-        sigAidi = new javax.swing.JLabel();
-        enterAidi = new javax.swing.JTextField();
+        sigCateg = new javax.swing.JLabel();
+        milihKetgor = new javax.swing.JComboBox<>();
         stockNumb = new javax.swing.JLabel();
         enterStockn = new javax.swing.JTextField();
         priceNumb = new javax.swing.JLabel();
         enterPricen = new javax.swing.JTextField();
-        sigCateg = new javax.swing.JLabel();
-        milihKetgor = new javax.swing.JComboBox<>();
         cariTon = new javax.swing.JButton();
         enterCari = new javax.swing.JTextField();
+        sigAidi = new javax.swing.JLabel();
+        enterAidi = new javax.swing.JTextField();
+        enterDescs = new javax.swing.JTextField();
         skrolTabel = new javax.swing.JScrollPane();
         isiDataan = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(600, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
+        setMaximizable(true);
+        setMaximumSize(new java.awt.Dimension(615, 440));
+        setMinimumSize(new java.awt.Dimension(615, 440));
+        setPreferredSize(new java.awt.Dimension(615, 440));
         setVisible(true);
 
         bekgronTabel.setBackground(new java.awt.Color(123, 139, 142));
         bekgronTabel.setToolTipText("");
+        bekgronTabel.setMaximumSize(new java.awt.Dimension(615, 440));
+        bekgronTabel.setMinimumSize(new java.awt.Dimension(615, 440));
+        bekgronTabel.setPreferredSize(new java.awt.Dimension(615, 440));
 
         lookaTon.setBackground(new java.awt.Color(102, 102, 102));
         lookaTon.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
@@ -224,9 +230,9 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         lookaTon.setToolTipText("");
         lookaTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lookaTon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lookaTon.setMaximumSize(new java.awt.Dimension(135, 30));
-        lookaTon.setMinimumSize(new java.awt.Dimension(135, 30));
-        lookaTon.setPreferredSize(new java.awt.Dimension(135, 30));
+        lookaTon.setMaximumSize(new java.awt.Dimension(130, 30));
+        lookaTon.setMinimumSize(new java.awt.Dimension(130, 30));
+        lookaTon.setPreferredSize(new java.awt.Dimension(130, 30));
         lookaTon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lookaTonActionPerformed(evt);
@@ -239,9 +245,9 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         addTon.setText("Adding");
         addTon.setToolTipText("");
         addTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        addTon.setMaximumSize(new java.awt.Dimension(135, 30));
-        addTon.setMinimumSize(new java.awt.Dimension(135, 30));
-        addTon.setPreferredSize(new java.awt.Dimension(135, 30));
+        addTon.setMaximumSize(new java.awt.Dimension(130, 30));
+        addTon.setMinimumSize(new java.awt.Dimension(130, 30));
+        addTon.setPreferredSize(new java.awt.Dimension(130, 30));
         addTon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addTonActionPerformed(evt);
@@ -255,9 +261,9 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         upDateTon.setToolTipText("");
         upDateTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         upDateTon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        upDateTon.setMaximumSize(new java.awt.Dimension(135, 30));
-        upDateTon.setMinimumSize(new java.awt.Dimension(135, 30));
-        upDateTon.setPreferredSize(new java.awt.Dimension(135, 30));
+        upDateTon.setMaximumSize(new java.awt.Dimension(130, 30));
+        upDateTon.setMinimumSize(new java.awt.Dimension(130, 30));
+        upDateTon.setPreferredSize(new java.awt.Dimension(130, 30));
         upDateTon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 upDateTonActionPerformed(evt);
@@ -271,9 +277,9 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         deleTon.setToolTipText("");
         deleTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         deleTon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        deleTon.setMaximumSize(new java.awt.Dimension(135, 30));
-        deleTon.setMinimumSize(new java.awt.Dimension(135, 30));
-        deleTon.setPreferredSize(new java.awt.Dimension(135, 30));
+        deleTon.setMaximumSize(new java.awt.Dimension(130, 30));
+        deleTon.setMinimumSize(new java.awt.Dimension(130, 30));
+        deleTon.setPreferredSize(new java.awt.Dimension(130, 30));
         deleTon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleTonActionPerformed(evt);
@@ -284,50 +290,36 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         sigproName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sigproName.setText("Name");
         sigproName.setToolTipText("");
-        sigproName.setMaximumSize(new java.awt.Dimension(80, 20));
-        sigproName.setMinimumSize(new java.awt.Dimension(80, 30));
-        sigproName.setPreferredSize(new java.awt.Dimension(80, 30));
+        sigproName.setMaximumSize(new java.awt.Dimension(100, 30));
+        sigproName.setMinimumSize(new java.awt.Dimension(100, 30));
+        sigproName.setPreferredSize(new java.awt.Dimension(100, 30));
 
         enterProname.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
         enterProname.setToolTipText("");
-        enterProname.setMaximumSize(new java.awt.Dimension(180, 30));
-        enterProname.setMinimumSize(new java.awt.Dimension(180, 30));
-        enterProname.setPreferredSize(new java.awt.Dimension(180, 30));
+        enterProname.setMaximumSize(new java.awt.Dimension(200, 30));
+        enterProname.setMinimumSize(new java.awt.Dimension(200, 30));
+        enterProname.setPreferredSize(new java.awt.Dimension(200, 30));
         enterProname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterPronameActionPerformed(evt);
             }
         });
 
-        enterDescs.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        enterDescs.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        enterDescs.setToolTipText("");
-        enterDescs.setMargin(new java.awt.Insets(-42, 0, 2, 2));
-        enterDescs.setMaximumSize(new java.awt.Dimension(180, 70));
-        enterDescs.setMinimumSize(new java.awt.Dimension(180, 70));
-        enterDescs.setPreferredSize(new java.awt.Dimension(180, 70));
-        enterDescs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enterDescsActionPerformed(evt);
-            }
-        });
+        sigCateg.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        sigCateg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sigCateg.setText("Category");
+        sigCateg.setToolTipText("");
+        sigCateg.setMaximumSize(new java.awt.Dimension(135, 30));
+        sigCateg.setMinimumSize(new java.awt.Dimension(135, 30));
+        sigCateg.setPreferredSize(new java.awt.Dimension(135, 30));
 
-        sigAidi.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        sigAidi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sigAidi.setText("ID");
-        sigAidi.setToolTipText("");
-        sigAidi.setMaximumSize(new java.awt.Dimension(80, 20));
-        sigAidi.setMinimumSize(new java.awt.Dimension(80, 30));
-        sigAidi.setPreferredSize(new java.awt.Dimension(80, 30));
-
-        enterAidi.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
-        enterAidi.setToolTipText("");
-        enterAidi.setMaximumSize(new java.awt.Dimension(180, 30));
-        enterAidi.setMinimumSize(new java.awt.Dimension(180, 30));
-        enterAidi.setPreferredSize(new java.awt.Dimension(180, 30));
-        enterAidi.addActionListener(new java.awt.event.ActionListener() {
+        milihKetgor.setToolTipText("");
+        milihKetgor.setMaximumSize(new java.awt.Dimension(135, 30));
+        milihKetgor.setMinimumSize(new java.awt.Dimension(135, 30));
+        milihKetgor.setPreferredSize(new java.awt.Dimension(135, 30));
+        milihKetgor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                enterAidiActionPerformed(evt);
+                milihKetgorActionPerformed(evt);
             }
         });
 
@@ -369,16 +361,6 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             }
         });
 
-        sigCateg.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        sigCateg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        sigCateg.setText("Category");
-        sigCateg.setToolTipText("");
-        sigCateg.setMaximumSize(new java.awt.Dimension(135, 30));
-        sigCateg.setMinimumSize(new java.awt.Dimension(135, 30));
-        sigCateg.setPreferredSize(new java.awt.Dimension(135, 30));
-
-        milihKetgor.setToolTipText("");
-
         cariTon.setBackground(new java.awt.Color(102, 102, 102));
         cariTon.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
         cariTon.setForeground(new java.awt.Color(204, 204, 204));
@@ -397,22 +379,52 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
 
         enterCari.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
         enterCari.setToolTipText("");
-        enterCari.setMaximumSize(new java.awt.Dimension(60, 30));
-        enterCari.setMinimumSize(new java.awt.Dimension(60, 30));
-        enterCari.setPreferredSize(new java.awt.Dimension(60, 30));
+        enterCari.setMaximumSize(new java.awt.Dimension(135, 30));
+        enterCari.setMinimumSize(new java.awt.Dimension(135, 30));
+        enterCari.setPreferredSize(new java.awt.Dimension(135, 30));
         enterCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterCariActionPerformed(evt);
             }
         });
 
-        skrolTabel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        sigAidi.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        sigAidi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sigAidi.setText("ID");
+        sigAidi.setToolTipText("");
+        sigAidi.setMaximumSize(new java.awt.Dimension(100, 30));
+        sigAidi.setMinimumSize(new java.awt.Dimension(100, 30));
+        sigAidi.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        enterAidi.setFont(new java.awt.Font("Minecraft", 0, 12)); // NOI18N
+        enterAidi.setToolTipText("");
+        enterAidi.setMaximumSize(new java.awt.Dimension(180, 30));
+        enterAidi.setMinimumSize(new java.awt.Dimension(180, 30));
+        enterAidi.setPreferredSize(new java.awt.Dimension(180, 30));
+        enterAidi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterAidiActionPerformed(evt);
+            }
+        });
+
+        enterDescs.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        enterDescs.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        enterDescs.setToolTipText("");
+        enterDescs.setMargin(new java.awt.Insets(-12, 0, 2, 6));
+        enterDescs.setMaximumSize(new java.awt.Dimension(200, 100));
+        enterDescs.setMinimumSize(new java.awt.Dimension(200, 100));
+        enterDescs.setPreferredSize(new java.awt.Dimension(200, 100));
+        enterDescs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterDescsActionPerformed(evt);
+            }
+        });
+
         skrolTabel.setToolTipText("");
-        skrolTabel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         skrolTabel.setAutoscrolls(true);
-        skrolTabel.setMaximumSize(new java.awt.Dimension(570, 190));
-        skrolTabel.setMinimumSize(new java.awt.Dimension(570, 190));
-        skrolTabel.setPreferredSize(new java.awt.Dimension(570, 190));
+        skrolTabel.setMaximumSize(new java.awt.Dimension(570, 205));
+        skrolTabel.setMinimumSize(new java.awt.Dimension(570, 205));
+        skrolTabel.setPreferredSize(new java.awt.Dimension(570, 205));
 
         isiDataan.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         isiDataan.setModel(new javax.swing.table.DefaultTableModel(
@@ -463,7 +475,8 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             }
         ));
         isiDataan.setToolTipText("");
-        isiDataan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        isiDataan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        isiDataan.setAutoscrolls(false);
         isiDataan.setMaximumSize(new java.awt.Dimension(700, 1500));
         isiDataan.setMinimumSize(new java.awt.Dimension(700, 1500));
         isiDataan.setPreferredSize(new java.awt.Dimension(700, 1500));
@@ -478,83 +491,75 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             .addGroup(bekgronTabelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enterDescs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(bekgronTabelLayout.createSequentialGroup()
-                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(bekgronTabelLayout.createSequentialGroup()
-                                .addComponent(lookaTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(deleTon, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(priceNumb, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enterPricen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(enterAidi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(bekgronTabelLayout.createSequentialGroup()
+                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bekgronTabelLayout.createSequentialGroup()
+                                .addComponent(addTon, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(upDateTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bekgronTabelLayout.createSequentialGroup()
-                                .addComponent(sigproName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(enterProname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bekgronTabelLayout.createSequentialGroup()
-                                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(enterAidi, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                    .addComponent(sigAidi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(enterDescs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(stockNumb, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bekgronTabelLayout.createSequentialGroup()
+                                .addComponent(upDateTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sigCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bekgronTabelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(addTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(bekgronTabelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cariTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(enterStockn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(stockNumb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sigCateg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(lookaTon, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sigproName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(milihKetgor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(enterProname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addComponent(enterStockn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(deleTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(priceNumb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(enterPricen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(milihKetgor, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(enterCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(skrolTabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                            .addComponent(sigAidi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(enterCari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(cariTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(skrolTabel, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE))
+                .addContainerGap())
         );
         bekgronTabelLayout.setVerticalGroup(
             bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronTabelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(enterProname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cariTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sigproName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lookaTon, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(upDateTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lookaTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sigCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(milihKetgor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enterCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sigproName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(enterProname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stockNumb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceNumb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bekgronTabelLayout.createSequentialGroup()
-                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(bekgronTabelLayout.createSequentialGroup()
-                                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(enterStockn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(enterPricen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(sigCateg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(milihKetgor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(bekgronTabelLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(sigAidi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cariTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(enterAidi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(enterCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(bekgronTabelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(enterDescs, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(enterStockn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sigAidi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(skrolTabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(priceNumb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enterPricen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(enterAidi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(enterDescs, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(skrolTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(34, 34, 34))
         );
 
         lookaTon.getAccessibleContext().setAccessibleName("View Listed");
@@ -570,14 +575,11 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         enterProname.getAccessibleContext().setAccessibleName("Name Field");
         enterProname.getAccessibleContext().setAccessibleDescription("Type the Name");
         enterProname.getAccessibleContext().setAccessibleParent(sigproName);
-        enterDescs.getAccessibleContext().setAccessibleName("Description Field");
-        enterDescs.getAccessibleContext().setAccessibleDescription("Type the Description");
-        enterDescs.getAccessibleContext().setAccessibleParent(enterProname);
-        sigAidi.getAccessibleContext().setAccessibleName("ID Sign");
-        sigAidi.getAccessibleContext().setAccessibleDescription("Sign: ID");
-        enterAidi.getAccessibleContext().setAccessibleName("ID Field");
-        enterAidi.getAccessibleContext().setAccessibleDescription("Type the ID");
-        enterAidi.getAccessibleContext().setAccessibleParent(sigAidi);
+        sigCateg.getAccessibleContext().setAccessibleName("Category Sign");
+        sigCateg.getAccessibleContext().setAccessibleDescription("Sign: Category");
+        milihKetgor.getAccessibleContext().setAccessibleName("Category Option");
+        milihKetgor.getAccessibleContext().setAccessibleDescription("Choosing the Category");
+        milihKetgor.getAccessibleContext().setAccessibleParent(sigCateg);
         stockNumb.getAccessibleContext().setAccessibleName("Stock Sign");
         stockNumb.getAccessibleContext().setAccessibleDescription("Sign: Stock");
         enterStockn.getAccessibleContext().setAccessibleName("Stock Field");
@@ -588,11 +590,14 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         enterPricen.getAccessibleContext().setAccessibleName("Price Field");
         enterPricen.getAccessibleContext().setAccessibleDescription("Type the Price");
         enterPricen.getAccessibleContext().setAccessibleParent(priceNumb);
-        sigCateg.getAccessibleContext().setAccessibleName("Category Sign");
-        sigCateg.getAccessibleContext().setAccessibleDescription("Sign: Category");
-        milihKetgor.getAccessibleContext().setAccessibleName("Category Option");
-        milihKetgor.getAccessibleContext().setAccessibleDescription("Choosing the Category");
-        milihKetgor.getAccessibleContext().setAccessibleParent(sigCateg);
+        sigAidi.getAccessibleContext().setAccessibleName("ID Sign");
+        sigAidi.getAccessibleContext().setAccessibleDescription("Sign: ID");
+        enterAidi.getAccessibleContext().setAccessibleName("ID Field");
+        enterAidi.getAccessibleContext().setAccessibleDescription("Type the ID");
+        enterAidi.getAccessibleContext().setAccessibleParent(sigAidi);
+        enterDescs.getAccessibleContext().setAccessibleName("Description Field");
+        enterDescs.getAccessibleContext().setAccessibleDescription("Type the Description");
+        enterDescs.getAccessibleContext().setAccessibleParent(enterProname);
         skrolTabel.getAccessibleContext().setAccessibleName("Table Panel Scroll");
         skrolTabel.getAccessibleContext().setAccessibleDescription("Panel with Scroller");
 
@@ -600,11 +605,13 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bekgronTabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bekgronTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -618,23 +625,33 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         /* Penyaringan */
         String naMenu = enterProname.getText();
         String tulisk = enterDescs.getText();
-        //
         String katgor = (String) milihKetgor.getSelectedItem();
+        String stockIn = enterStockn.getText().trim();
+        String priceIn = enterPricen.getText().trim();
         //
+        int stok;
         long hrgbrp;
         /* Penyaringan */
 
         /* Sistem */
-        if (enterProname.getText().equals("") || //enterDescs.getText().equals("") ||
-            enterStockn.getText().equals("") || enterPricen.getText().equals("")) {
+        if (naMenu.isEmpty() || stockIn.isEmpty() || priceIn.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Fill it!",
                     "Unfilled",
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.WARNING_MESSAGE);
             return; // Keluar dari metode jika ada field yang kosong
+        }
+        //
+        if (enterStockn.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Stock and Price must be number!",
+                    "Non Numeric State",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
         }
 
         try {
+            stok = Integer.parseInt(enterStockn.getText());
             hrgbrp = Integer.parseInt(enterPricen.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
@@ -645,20 +662,15 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         }
 
         try {
-            String query = "INSERT INTO " +
-                           "product" + " (" +
-                           "pro_name" + ", " +
-                           "pro_desc" + ", " +
-                           "category" + ", " +
-                           "price" + ") " +
-                           "VALUES"+ " (?, ?, ?, ?)";
+            String query = "INSERT INTO product (pro_name, pro_desc, category, stock, price) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement stmt = koneksi.prepareStatement(query);
             //
             stmt.setString(1, naMenu);
             stmt.setString(2, tulisk);
             stmt.setString(3, katgor);
-            stmt.setLong(4, hrgbrp);
+            stmt.setInt(4, stok);
+            stmt.setLong(5, hrgbrp);
             stmt.executeUpdate();
             //
             JOptionPane.showMessageDialog(null, "Added!");
@@ -680,77 +692,55 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         int selectedRow = isiDataan.getSelectedRow();
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(null,
-                    "Choose who you wanna to update!",
+                    "Choose the Table to update!",
                     "Unchoosen Table",
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        //  Set up
-        String barangan = enterProname.getText();
-        String deskrips = enterDescs.getText();
-
-        // Ambil ID dari tabel (kolom 0)
+        // Ambil ID lama dari tabel
         int lamaId = (int) isiDataan.getValueAt(selectedRow, 0);
-        int baruId = lamaId; // Default ke ID lama jika tidak diisi
-
-        // Must be filled
-        if (barangan.isEmpty() || enterStockn.getText().trim().isEmpty() ||
-            enterPricen.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null,
-                    "Fill it!",
-                    "Unfilled",
-                    JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        // Validasi input
-        if (!enterAidi.getText().trim().isEmpty()) {
-            try {
-                baruId = Integer.parseInt(enterAidi.getText().trim());
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null,
-                        "New ID must be a number!",
-                        "Invalid Input",
-                        JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-        }
+        int stock = Integer.parseInt(enterStockn.getText().trim());
+        String deskrips = enterDescs.getText().trim();
+        boolean updateDesc = !deskrips.isEmpty(); // Cek apakah deskripsi diisi
 
         try {
+            // Validasi input numerik
             long aturkaya = Long.parseLong(enterPricen.getText().trim());
 
-            // Perbaikan query: gunakan kolom yang benar (id)
-            String kueri = "UPDATE " +
-                           "product" + " SET " +
-                           "id" + " = ?, " +
-                           "pro_name" + " = ?, " +
-                           "pro_desc" + " = ?, " +
-                           "category" + " = ?, " +
-                           "price" + " = ? " + "WHERE " +
-                           "id" + " = ?";
+            // Bangun query dinamis
+            StringBuilder kueri = new StringBuilder("UPDATE product SET pro_name = ?, category = ?, stock = ?, price = ?");
+            if (updateDesc) {
+                kueri.append(", pro_desc = ?"); // Tambahkan kolom deskripsi hanya jika diisi
+            }
+            kueri.append(" WHERE id = ?");
 
-            PreparedStatement stmt = koneksi.prepareStatement(kueri);
-            //
-            stmt.setInt(1, baruId);
-            stmt.setString(2, enterProname.getText().trim());
-            stmt.setString(3, enterDescs.getText().trim());
-            stmt.setString(4, (String) milihKetgor.getSelectedItem());
-            stmt.setLong(5, aturkaya);
-            stmt.setInt(6, lamaId);  // ID dari tabel, bukan text field
-            //
+            PreparedStatement stmt = koneksi.prepareStatement(kueri.toString());
+
+            // Set parameter sesuai urutan
+            int paramIndex = 1;
+            stmt.setString(paramIndex++, enterProname.getText().trim());    // pro_name
+            stmt.setString(paramIndex++, (String) milihKetgor.getSelectedItem()); // category
+            stmt.setInt(paramIndex++, stock);  // stock
+            stmt.setLong(paramIndex++, aturkaya); // price
+
+            if (updateDesc) {
+                stmt.setString(paramIndex++, deskrips); // pro_desc (hanya jika diisi)
+            }
+
+            stmt.setInt(paramIndex, lamaId); // WHERE id
+
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Updating the Stuff!");
-            liatEnak();
+            JOptionPane.showMessageDialog(null, "Updated Data!");
+            liatEnak(); // Refresh tabel
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
-                    "Stock and Price isn't right...",
+                    "Price must be number!",
                     "Invalid Input",
-                    JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.WARNING_MESSAGE);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,
-                    "Database Error: " + ex.getMessage(),
+                    "Error database: " + ex.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
@@ -782,7 +772,7 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             stmt.setInt(1, id);
             stmt.executeUpdate();
             //
-            JOptionPane.showMessageDialog(null, "Deleting the Costumer!");
+            JOptionPane.showMessageDialog(null, "Deleting the Product!");
             liatEnak();  // Refresh tabel setelah menghapus products
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,
@@ -834,6 +824,10 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
     private void enterCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterCariActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enterCariActionPerformed
+
+    private void milihKetgorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_milihKetgorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_milihKetgorActionPerformed
 
     private void isiKombo() {
         try {
