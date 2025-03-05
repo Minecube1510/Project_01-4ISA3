@@ -41,6 +41,8 @@ import java.sql.ResultSet;
  //
 import Ab_NextFrame_ReSource.AdminDashboardPage;
 import Ab_NextFrame_ReSource.CustomerDashboardPage;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 // Nyari File lain //
 /* Main Application */
 public class LoginPage extends javax.swing.JFrame {
@@ -97,8 +99,7 @@ public class LoginPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        outAppEd = new javax.swing.JButton();
+        skrolLogin = new javax.swing.JScrollPane();
         mainBekgron = new javax.swing.JPanel();
         judulTempatBisnis = new javax.swing.JLabel();
         namaPelakuan = new javax.swing.JLabel();
@@ -108,31 +109,9 @@ public class LoginPage extends javax.swing.JFrame {
         goLogIn = new javax.swing.JButton();
         addCustomIn = new javax.swing.JButton();
 
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        outAppEd.setBackground(new java.awt.Color(225, 4, 37));
-        outAppEd.setFont(new java.awt.Font("Minecraft", 1, 28)); // NOI18N
-        outAppEd.setForeground(new java.awt.Color(6, 202, 0));
-        outAppEd.setText("Exit");
-        outAppEd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        outAppEd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        outAppEd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        outAppEd.setName(""); // NOI18N
-        outAppEd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                outAppEdActionPerformed(evt);
-            }
-        });
-        outAppEd.getAccessibleContext().setAccessibleDescription("Close the App");
+        skrolLogin.setMaximumSize(new java.awt.Dimension(800, 500));
+        skrolLogin.setMinimumSize(new java.awt.Dimension(800, 500));
+        skrolLogin.setPreferredSize(new java.awt.Dimension(800, 500));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Partival's Catering");
@@ -141,7 +120,6 @@ public class LoginPage extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 500));
         setName("login_gui"); // NOI18N
         setPreferredSize(new java.awt.Dimension(800, 500));
-        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -152,9 +130,9 @@ public class LoginPage extends javax.swing.JFrame {
         mainBekgron.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         mainBekgron.setForeground(new java.awt.Color(0, 204, 204));
         mainBekgron.setToolTipText("");
-        mainBekgron.setMaximumSize(new java.awt.Dimension(772, 450));
-        mainBekgron.setMinimumSize(new java.awt.Dimension(772, 450));
-        mainBekgron.setPreferredSize(new java.awt.Dimension(772, 450));
+        mainBekgron.setMaximumSize(new java.awt.Dimension(800, 500));
+        mainBekgron.setMinimumSize(new java.awt.Dimension(800, 500));
+        mainBekgron.setPreferredSize(new java.awt.Dimension(800, 500));
 
         judulTempatBisnis.setFont(new java.awt.Font("Harlow Solid Italic", 3, 36)); // NOI18N
         judulTempatBisnis.setForeground(new java.awt.Color(27, 193, 32));
@@ -165,10 +143,10 @@ public class LoginPage extends javax.swing.JFrame {
         judulTempatBisnis.setAlignmentY(0.0F);
         judulTempatBisnis.setDoubleBuffered(true);
         judulTempatBisnis.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        judulTempatBisnis.setMaximumSize(new java.awt.Dimension(770, 160));
-        judulTempatBisnis.setMinimumSize(new java.awt.Dimension(770, 160));
+        judulTempatBisnis.setMaximumSize(new java.awt.Dimension(800, 150));
+        judulTempatBisnis.setMinimumSize(new java.awt.Dimension(800, 150));
         judulTempatBisnis.setName("Name Title"); // NOI18N
-        judulTempatBisnis.setPreferredSize(new java.awt.Dimension(770, 160));
+        judulTempatBisnis.setPreferredSize(new java.awt.Dimension(800, 150));
         judulTempatBisnis.setRequestFocusEnabled(false);
 
         namaPelakuan.setFont(new java.awt.Font("Playbill", 1, 40)); // NOI18N
@@ -185,9 +163,10 @@ public class LoginPage extends javax.swing.JFrame {
         isiNama.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         isiNama.setToolTipText("");
         isiNama.setMargin(new java.awt.Insets(4, 6, 2, 6));
-        isiNama.setMaximumSize(new java.awt.Dimension(550, 40));
-        isiNama.setMinimumSize(new java.awt.Dimension(550, 40));
-        isiNama.setPreferredSize(new java.awt.Dimension(550, 40));
+        isiNama.setMaximumSize(new java.awt.Dimension(400, 40));
+        isiNama.setMinimumSize(new java.awt.Dimension(400, 40));
+        isiNama.setName(""); // NOI18N
+        isiNama.setPreferredSize(new java.awt.Dimension(400, 40));
         isiNama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 isiNamaActionPerformed(evt);
@@ -207,10 +186,10 @@ public class LoginPage extends javax.swing.JFrame {
         isiNoTelp.setFont(new java.awt.Font("Minecraft", 1, 12)); // NOI18N
         isiNoTelp.setToolTipText("");
         isiNoTelp.setMargin(new java.awt.Insets(4, 6, 2, 6));
-        isiNoTelp.setMaximumSize(new java.awt.Dimension(550, 40));
-        isiNoTelp.setMinimumSize(new java.awt.Dimension(550, 40));
+        isiNoTelp.setMaximumSize(new java.awt.Dimension(400, 40));
+        isiNoTelp.setMinimumSize(new java.awt.Dimension(400, 40));
         isiNoTelp.setName("phoNumber"); // NOI18N
-        isiNoTelp.setPreferredSize(new java.awt.Dimension(550, 40));
+        isiNoTelp.setPreferredSize(new java.awt.Dimension(400, 40));
         isiNoTelp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 isiNoTelpActionPerformed(evt);
@@ -230,10 +209,10 @@ public class LoginPage extends javax.swing.JFrame {
         goLogIn.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(58, 9, 9), new java.awt.Color(84, 35, 49)));
         goLogIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goLogIn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        goLogIn.setMaximumSize(new java.awt.Dimension(250, 50));
-        goLogIn.setMinimumSize(new java.awt.Dimension(250, 50));
+        goLogIn.setMaximumSize(new java.awt.Dimension(180, 50));
+        goLogIn.setMinimumSize(new java.awt.Dimension(180, 50));
         goLogIn.setName(""); // NOI18N
-        goLogIn.setPreferredSize(new java.awt.Dimension(250, 50));
+        goLogIn.setPreferredSize(new java.awt.Dimension(180, 50));
         goLogIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 goLogInActionPerformed(evt);
@@ -248,10 +227,10 @@ public class LoginPage extends javax.swing.JFrame {
         addCustomIn.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(19, 153, 0), new java.awt.Color(32, 59, 0)));
         addCustomIn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addCustomIn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        addCustomIn.setMaximumSize(new java.awt.Dimension(250, 50));
-        addCustomIn.setMinimumSize(new java.awt.Dimension(250, 50));
+        addCustomIn.setMaximumSize(new java.awt.Dimension(180, 50));
+        addCustomIn.setMinimumSize(new java.awt.Dimension(180, 50));
         addCustomIn.setName(""); // NOI18N
-        addCustomIn.setPreferredSize(new java.awt.Dimension(250, 50));
+        addCustomIn.setPreferredSize(new java.awt.Dimension(180, 50));
         addCustomIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addCustomInActionPerformed(evt);
@@ -263,45 +242,46 @@ public class LoginPage extends javax.swing.JFrame {
         mainBekgronLayout.setHorizontalGroup(
             mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainBekgronLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(namaPelakuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainBekgronLayout.createSequentialGroup()
-                        .addComponent(goLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addCustomIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(isiNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(isiNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(judulTempatBisnis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(4, 4, 4))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainBekgronLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(judulTempatBisnis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(123, 123, 123)
+                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(mainBekgronLayout.createSequentialGroup()
+                        .addComponent(namaPelakuan, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(isiNama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(mainBekgronLayout.createSequentialGroup()
+                        .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainBekgronLayout.createSequentialGroup()
+                                .addComponent(goLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addCustomIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(isiNoTelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(107, 107, 107))
         );
         mainBekgronLayout.setVerticalGroup(
             mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainBekgronLayout.createSequentialGroup()
-                .addComponent(judulTempatBisnis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(isiNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(namaPelakuan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(judulTempatBisnis, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(isiNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                    .addComponent(namaPelakuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(isiNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(isiNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(goLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(goLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addCustomIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
-        judulTempatBisnis.getAccessibleContext().setAccessibleName("Business Place");
-        judulTempatBisnis.getAccessibleContext().setAccessibleDescription("Title of the Business");
+        judulTempatBisnis.getAccessibleContext().setAccessibleName("");
         namaPelakuan.getAccessibleContext().setAccessibleName("Full Username Sign");
         namaPelakuan.getAccessibleContext().setAccessibleDescription("Sign: Full Name");
         namaPelakuan.getAccessibleContext().setAccessibleParent(judulTempatBisnis);
@@ -318,25 +298,25 @@ public class LoginPage extends javax.swing.JFrame {
         goLogIn.getAccessibleContext().setAccessibleDescription("Go Further in App");
         goLogIn.getAccessibleContext().setAccessibleParent(this);
 
+        //mainBekgron.setLayout(new GridBagLayout());
+        //GridBagConstraints gbc = new GridBagConstraints();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainBekgron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(mainBekgron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(mainBekgron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addComponent(mainBekgron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
-        mainBekgron.getAccessibleContext().setAccessibleName("Panel Form");
-        mainBekgron.getAccessibleContext().setAccessibleDescription("Background of Login Form");
+        mainBekgron.getAccessibleContext().setAccessibleName("");
 
         getAccessibleContext().setAccessibleDescription("First Main Login");
         getAccessibleContext().setAccessibleParent(this);
@@ -356,19 +336,6 @@ public class LoginPage extends javax.swing.JFrame {
         this.dispose();
         /* Menutup jendela */
     }//GEN-LAST:event_formWindowClosing
-
-    private void outAppEdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outAppEdActionPerformed
-        MegangData pegangData = new MegangData();
-
-        /* Menampilkan pesan */
-        LoginPage closapp = new LoginPage(pegangData);
-        closapp.ClosingApp();
-        /* Menampilkan pesan */
-
-        /* Menutup jendela */
-        System.exit(0);
-        /* Menutup jendela */
-    }//GEN-LAST:event_outAppEdActionPerformed
 
     private void authenticateUser (String username, String password) {
         String dapetNama = isiNama.getText();
@@ -628,12 +595,11 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JButton goLogIn;
     private javax.swing.JTextField isiNama;
     private javax.swing.JTextField isiNoTelp;
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel judulTempatBisnis;
     private javax.swing.JPanel mainBekgron;
     private javax.swing.JLabel namaPelakuan;
     private javax.swing.JLabel noTelp;
-    private javax.swing.JButton outAppEd;
+    private javax.swing.JScrollPane skrolLogin;
     // End of variables declaration//GEN-END:variables
 }
 /* Main Application */

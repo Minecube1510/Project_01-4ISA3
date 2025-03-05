@@ -102,6 +102,8 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        optUnknown = new javax.swing.JButton();
+        skrolLanggan = new javax.swing.JScrollPane();
         bekgronServis = new javax.swing.JPanel();
         judulServis = new javax.swing.JPanel();
         judulAtas = new javax.swing.JLabel();
@@ -115,26 +117,46 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
         optMenu = new javax.swing.JButton();
         optOrdery = new javax.swing.JButton();
         optReserve = new javax.swing.JButton();
-        optCombo = new javax.swing.JButton();
         liatServis = new javax.swing.JDesktopPane();
+
+        optUnknown.setBackground(new java.awt.Color(0, 51, 153));
+        optUnknown.setFont(new java.awt.Font("Minecraft", 1, 20)); // NOI18N
+        optUnknown.setForeground(new java.awt.Color(7, 210, 7));
+        optUnknown.setText("4");
+        optUnknown.setToolTipText("");
+        optUnknown.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        optUnknown.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        optUnknown.setMaximumSize(new java.awt.Dimension(182, 41));
+        optUnknown.setMinimumSize(new java.awt.Dimension(182, 41));
+        optUnknown.setPreferredSize(new java.awt.Dimension(182, 41));
+        optUnknown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                optUnknownActionPerformed(evt);
+            }
+        });
+        optUnknown.getAccessibleContext().setAccessibleName("Combo Option");
+        optUnknown.getAccessibleContext().setAccessibleDescription("Option of Combo");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
-        setMaximumSize(new java.awt.Dimension(800, 500));
-        setMinimumSize(new java.awt.Dimension(800, 500));
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 500));
-        setResizable(false);
+        setMaximumSize(new java.awt.Dimension(850, 600));
+        setMinimumSize(new java.awt.Dimension(850, 600));
+        setPreferredSize(new java.awt.Dimension(850, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
+        skrolLanggan.setMaximumSize(new java.awt.Dimension(800, 500));
+        skrolLanggan.setMinimumSize(new java.awt.Dimension(800, 500));
+        skrolLanggan.setPreferredSize(new java.awt.Dimension(800, 500));
+
         bekgronServis.setBackground(new java.awt.Color(51, 51, 51));
         bekgronServis.setToolTipText("");
         bekgronServis.setMaximumSize(new java.awt.Dimension(800, 500));
         bekgronServis.setMinimumSize(new java.awt.Dimension(800, 500));
+        bekgronServis.setPreferredSize(new java.awt.Dimension(800, 500));
 
         judulServis.setBackground(new java.awt.Color(51, 153, 0));
         judulServis.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 0, 0)));
@@ -261,7 +283,7 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
                 .addGroup(kendaliServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pengGuna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(welKom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addGroup(kendaliServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tomboLogOut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tubuTompol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -348,22 +370,6 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
             }
         });
 
-        optCombo.setBackground(new java.awt.Color(0, 51, 153));
-        optCombo.setFont(new java.awt.Font("Minecraft", 1, 20)); // NOI18N
-        optCombo.setForeground(new java.awt.Color(7, 210, 7));
-        optCombo.setText("4");
-        optCombo.setToolTipText("");
-        optCombo.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED, new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
-        optCombo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        optCombo.setMaximumSize(new java.awt.Dimension(182, 41));
-        optCombo.setMinimumSize(new java.awt.Dimension(182, 41));
-        optCombo.setPreferredSize(new java.awt.Dimension(182, 41));
-        optCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                optComboActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout opsiKeServisLayout = new javax.swing.GroupLayout(opsiKeServis);
         opsiKeServis.setLayout(opsiKeServisLayout);
         opsiKeServisLayout.setHorizontalGroup(
@@ -373,8 +379,7 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
                 .addGroup(opsiKeServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(optMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(optOrdery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(optReserve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(optCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(optReserve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
         opsiKeServisLayout.setVerticalGroup(
@@ -386,9 +391,7 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
                 .addComponent(optOrdery, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(optReserve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(optCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         optMenu.getAccessibleContext().setAccessibleName("Menu Option");
@@ -397,8 +400,6 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
         optOrdery.getAccessibleContext().setAccessibleDescription("Option of Order");
         optReserve.getAccessibleContext().setAccessibleName("Reserve Option");
         optReserve.getAccessibleContext().setAccessibleDescription("Option of Reserve");
-        optCombo.getAccessibleContext().setAccessibleName("Combo Option");
-        optCombo.getAccessibleContext().setAccessibleDescription("Option of Combo");
 
         liatServis.setBackground(new java.awt.Color(255, 0, 0));
         liatServis.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, new java.awt.Color(0, 0, 0)));
@@ -411,11 +412,11 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
         liatServis.setLayout(liatServisLayout);
         liatServisLayout.setHorizontalGroup(
             liatServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 626, Short.MAX_VALUE)
         );
         liatServisLayout.setVerticalGroup(
             liatServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 476, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout bekgronServisLayout = new javax.swing.GroupLayout(bekgronServis);
@@ -428,7 +429,7 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
                     .addGroup(bekgronServisLayout.createSequentialGroup()
                         .addComponent(judulServis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(kendaliServis, javax.swing.GroupLayout.DEFAULT_SIZE, 582, Short.MAX_VALUE))
+                        .addComponent(kendaliServis, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE))
                     .addGroup(bekgronServisLayout.createSequentialGroup()
                         .addComponent(opsiKeServis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -444,7 +445,7 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
                     .addComponent(judulServis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bekgronServisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opsiKeServis, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                    .addComponent(opsiKeServis, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
                     .addComponent(liatServis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -458,19 +459,24 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
         liatServis.getAccessibleContext().setAccessibleName("Observe Panel");
         liatServis.getAccessibleContext().setAccessibleDescription("Observing of Service");
 
+        skrolLanggan.setViewportView(bekgronServis);
+        bekgronServis.getAccessibleContext().setAccessibleName("Main Layer Background");
+        bekgronServis.getAccessibleContext().setAccessibleDescription("As Frame's Background");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronServis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 812, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(skrolLanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronServis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 512, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(skrolLanggan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        bekgronServis.getAccessibleContext().setAccessibleName("Main Layer Background");
-        bekgronServis.getAccessibleContext().setAccessibleDescription("As Frame's Background");
 
         getAccessibleContext().setAccessibleDescription("Admin Dashboard");
         getAccessibleContext().setAccessibleParent(this);
@@ -541,11 +547,11 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
         kePesanan.setVisible(true);
     }//GEN-LAST:event_tomboLogOutActionPerformed
 
-    private void optComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optComboActionPerformed
+    private void optUnknownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optUnknownActionPerformed
         Customer__NNN__Display siarAn = new Customer__NNN__Display();
         liatServis.removeAll();
         liatServis.add(siarAn).setVisible(true);
-    }//GEN-LAST:event_optComboActionPerformed
+    }//GEN-LAST:event_optUnknownActionPerformed
     //
     private void x3() {
         //
@@ -1389,11 +1395,12 @@ public class CustomerDashboardPage extends javax.swing.JFrame {
     private javax.swing.JPanel kendaliServis;
     private javax.swing.JDesktopPane liatServis;
     private javax.swing.JPanel opsiKeServis;
-    private javax.swing.JButton optCombo;
     private javax.swing.JButton optMenu;
     private javax.swing.JButton optOrdery;
     private javax.swing.JButton optReserve;
+    private javax.swing.JButton optUnknown;
     private javax.swing.JLabel pengGuna;
+    private javax.swing.JScrollPane skrolLanggan;
     private javax.swing.JButton tomboLogOut;
     private javax.swing.JButton tubuTompol;
     private javax.swing.JLabel welKom;

@@ -5,14 +5,17 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="maximum" type="boolean" value="true"/>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
@@ -34,12 +37,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="bekgronIntro" alignment="0" max="32767" attributes="0"/>
+          <Component id="bekgronIntro" alignment="0" pref="625" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="bekgronIntro" alignment="0" max="32767" attributes="0"/>
+          <Component id="bekgronIntro" alignment="0" pref="450" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -50,6 +53,15 @@
           <Color blue="0" green="99" red="33" type="rgb"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Sub-Panel Background"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
       </Properties>
 
       <Layout>
@@ -60,8 +72,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="titleProjek1" max="32767" attributes="0"/>
                       <Component id="titleProjek" max="32767" attributes="0"/>
-                      <Component id="titleProjek2" pref="576" max="32767" attributes="0"/>
-                      <Component id="titleProjek3" pref="576" max="32767" attributes="0"/>
+                      <Component id="titleProjek2" pref="613" max="32767" attributes="0"/>
+                      <Component id="titleProjek3" pref="613" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -78,7 +90,7 @@
                   <Component id="titleProjek2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="titleProjek3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="124" max="32767" attributes="0"/>
+                  <EmptySpace pref="110" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

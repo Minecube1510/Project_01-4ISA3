@@ -138,7 +138,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI liatkan = (BasicInternalFrameUI)this.getUI();
-        liatkan.setNorthPane(null);
+        //liatkan.setNorthPane(null);
     }
 
         DefaultTableModel hapusMeja;
@@ -240,13 +240,18 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         lookaTon1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(600, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setClosable(true);
+        setMaximizable(true);
+        setMaximumSize(new java.awt.Dimension(615, 440));
+        setMinimumSize(new java.awt.Dimension(615, 440));
+        setPreferredSize(new java.awt.Dimension(615, 440));
         setVisible(true);
 
         bekgronTabel.setBackground(new java.awt.Color(123, 139, 142));
         bekgronTabel.setToolTipText("");
+        bekgronTabel.setMaximumSize(new java.awt.Dimension(615, 440));
+        bekgronTabel.setMinimumSize(new java.awt.Dimension(615, 440));
+        bekgronTabel.setPreferredSize(new java.awt.Dimension(615, 440));
 
         lookaTon.setBackground(new java.awt.Color(102, 102, 102));
         lookaTon.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
@@ -522,7 +527,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                                 .addComponent(panelPilih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lookaTon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         bekgronTabelLayout.setVerticalGroup(
             bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,7 +551,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                     .addComponent(lookaTon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(skrolTabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

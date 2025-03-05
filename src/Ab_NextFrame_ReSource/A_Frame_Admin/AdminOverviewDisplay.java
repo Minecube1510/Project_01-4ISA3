@@ -52,7 +52,7 @@ public final class AdminOverviewDisplay extends javax.swing.JInternalFrame {
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI liatkan = (BasicInternalFrameUI)this.getUI();
-        liatkan.setNorthPane(null);
+        //liatkan.setNorthPane(null);
         
         //
     }
@@ -73,13 +73,18 @@ public final class AdminOverviewDisplay extends javax.swing.JInternalFrame {
         titleProjek3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(600, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setClosable(true);
+        setMaximizable(true);
+        setMaximumSize(new java.awt.Dimension(615, 440));
+        setMinimumSize(new java.awt.Dimension(615, 440));
+        setPreferredSize(new java.awt.Dimension(615, 440));
         setVisible(true);
 
         bekgronIntro.setBackground(new java.awt.Color(51, 153, 0));
         bekgronIntro.setToolTipText("Sub-Panel Background");
+        bekgronIntro.setMaximumSize(new java.awt.Dimension(615, 440));
+        bekgronIntro.setMinimumSize(new java.awt.Dimension(615, 440));
+        bekgronIntro.setPreferredSize(new java.awt.Dimension(615, 440));
 
         titleProjek.setFont(new java.awt.Font("Planeptune HDD", 3, 40)); // NOI18N
         titleProjek.setForeground(new java.awt.Color(102, 0, 102));
@@ -122,8 +127,8 @@ public final class AdminOverviewDisplay extends javax.swing.JInternalFrame {
                 .addGroup(bekgronIntroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(titleProjek1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(titleProjek, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(titleProjek2, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
-                    .addComponent(titleProjek3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+                    .addComponent(titleProjek2, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                    .addComponent(titleProjek3, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
                 .addContainerGap())
         );
         bekgronIntroLayout.setVerticalGroup(
@@ -137,18 +142,18 @@ public final class AdminOverviewDisplay extends javax.swing.JInternalFrame {
                 .addComponent(titleProjek2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(titleProjek3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronIntro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bekgronIntro, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronIntro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bekgronIntro, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         pack();
