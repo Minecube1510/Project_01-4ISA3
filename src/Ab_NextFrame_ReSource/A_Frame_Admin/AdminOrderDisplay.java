@@ -79,7 +79,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
 
         // Editing Header Table
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "ID", "Name", "Order", "Quantity", "Total Price", "Status"}, 0) { // Kolom baru "ID"
+            "No", "Name", "Order", "Quantity", "Total Price", "Date and Time", "Pay Method", "Status"}, 0) { // Kolom baru "ID"
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -90,7 +90,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         isiDataan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Memungkinkan pemilihan satu baris
         //
         /* Atur lebar kolom */
-        // ID
+        // ID/No
         isiDataan.getColumnModel().getColumn(0).setPreferredWidth(100);
         //
         // Nama
@@ -105,8 +105,14 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         // Harga Total
         isiDataan.getColumnModel().getColumn(4).setPreferredWidth(150);
         //
-        // Pembayaran (Udah atau Belum)
+        // Tanggal Waktu Pembayaran
         isiDataan.getColumnModel().getColumn(5).setPreferredWidth(150);
+        //
+        // Pembayaran (Metode)
+        isiDataan.getColumnModel().getColumn(6).setPreferredWidth(150);
+        //
+        // Pembayaran (Udah atau Belum)
+        isiDataan.getColumnModel().getColumn(7).setPreferredWidth(150);
         //
         /* Atur lebar kolom */
 
@@ -151,65 +157,43 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
     //
     @SuppressWarnings("empty-statement")
     public void liatPesanAn() {
-        /* Permulaan */
-        DefaultTableModel keMeja = (DefaultTableModel)isiDataan.getModel();
-        keMeja.setRowCount(0);
+        DefaultTableModel keMeja = (DefaultTableModel) isiDataan.getModel();
+        keMeja.setRowCount(0); // Reset tabel
 
-        String kolom01 = "id";
-        String index01 = "0";
-        //
-         // [name] //
-        String kolom02 = "name";
-        String index02 = "Inmat";
-         // [Inmat] //
-        //
-         // [telphone] //
-        String kolom03 = "telphone";
-        String index03 = "123498763690";
-         // [123498763690] //
-        /* Permulaan */
+        // Query dengan JOIN ke tabel customer dan product
+        String query = 
+            "SELECT td.id, c.name AS customer_name, p.pro_name AS product_name, " +
+            "td.ordet_totalqty, td.ordet_amount, td.order_datetime, td.pay_method, " +
+            "td.order_done AS status " +
+            "FROM transaction_detail td " +
+            "JOIN transaction t ON td.transaction_id = t.id " +       // Join ke transaction
+            "JOIN customer c ON t.customer_id = c.id " +              // Ambil nama customer
+            "JOIN product p ON t.product_id = p.id";                  // Ambil nama produk
 
-        // Reset filter dan pencarian
-        TableRowSorter<DefaultTableModel> sorter = 
-            (TableRowSorter<DefaultTableModel>) isiDataan.getRowSorter();
-        if (sorter != null) {
-            sorter.setRowFilter(null);
-        }
-        enterCari.setText(""); // Kosongkan text field
-
-        /* String-an */
-        String query = "SELECT t.id AS transaction_id, c.name AS customer_name, "
-                     + "p.pro_name AS product_name, t.total_qty, t.total_amount, "
-                     + "COALESCE(td.order_done, 'Not Done') AS status " // Handle NULL values
-                     + "FROM transaction t "
-                     + "JOIN customer c ON t.customer_id = c.id "
-                     + "JOIN product p ON t.product_id = p.id "
-                     + "LEFT JOIN transaction_detail td ON t.id = td.transaction_id " // LEFT JOIN
-                     + "GROUP BY t.id"; // Group by transaction ID
-        /* String-an */
-
-
-        /* Sistematis */
         try (PreparedStatement siapStet = koneksi.prepareStatement(query);
              ResultSet hasil = siapStet.executeQuery()) {
 
-            // Isi data ke tabel
-            if (!hasil.isBeforeFirst()) {
-                JOptionPane.showMessageDialog(this,
-                        "There's no Transaction Data!",
-                        "Not Found Transaction",
-                        JOptionPane.WARNING_MESSAGE);
-            } else {
-                while (hasil.next()) {
-                    int id = hasil.getInt("transaction_id"); // Ambil ID sebagai integer
-                    String nama = hasil.getString("customer_name");
-                    String produk = hasil.getString("product_name");
-                    int qty = hasil.getInt("total_qty");
-                    long harga = hasil.getLong("total_amount");
-                    String status = hasil.getString("status");
-                    keMeja.addRow(new Object[]{id, nama, produk, qty, harga, status}); // Tambahkan ID ke baris
-                }
+            while (hasil.next()) {
+                int id = hasil.getInt("id");
+                String customerName = hasil.getString("customer_name"); // Ambil nama customer
+                String productName = hasil.getString("product_name");   // Ambil nama produk
+                int qty = hasil.getInt("ordet_totalqty");
+                long harga = hasil.getLong("ordet_amount");
+                String datetime = hasil.getString("order_datetime");
+                String payMethod = hasil.getString("pay_method");
+                String status = hasil.getString("status");
 
+                // Update row data dengan nama customer dan produk
+                keMeja.addRow(new Object[]{
+                    id, 
+                    customerName,    // Kolom "Name" diisi dari customer.name
+                    productName,     // Kolom "Order" diisi dari product.pro_name
+                    qty, 
+                    harga, 
+                    datetime, 
+                    payMethod, 
+                    status
+                });
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, 
@@ -217,7 +201,6 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                 "Error", 
                 JOptionPane.ERROR_MESSAGE);
         }
-        /* Sistematis */
     }
 
     @SuppressWarnings("unchecked")
@@ -235,7 +218,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         sigPaid = new javax.swing.JLabel();
         panelPilih = new javax.swing.JScrollPane();
         antaraPilih = new javax.swing.JList<>();
-        lookaTon1 = new javax.swing.JButton();
+        peiBayar = new javax.swing.JButton();
         skrolTabel = new javax.swing.JScrollPane();
         isiDataan = new javax.swing.JTable();
 
@@ -337,7 +320,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
             }
         });
 
-        sigPaid.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        sigPaid.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         sigPaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sigPaid.setText("Paid");
         sigPaid.setMaximumSize(new java.awt.Dimension(80, 67));
@@ -361,18 +344,18 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         antaraPilih.setPreferredSize(new java.awt.Dimension(90, 67));
         panelPilih.setViewportView(antaraPilih);
 
-        lookaTon1.setBackground(new java.awt.Color(102, 102, 102));
-        lookaTon1.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 30)); // NOI18N
-        lookaTon1.setForeground(new java.awt.Color(204, 204, 204));
-        lookaTon1.setText("Completion");
-        lookaTon1.setToolTipText("");
-        lookaTon1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        lookaTon1.setMaximumSize(new java.awt.Dimension(100, 30));
-        lookaTon1.setMinimumSize(new java.awt.Dimension(100, 30));
-        lookaTon1.setPreferredSize(new java.awt.Dimension(100, 30));
-        lookaTon1.addActionListener(new java.awt.event.ActionListener() {
+        peiBayar.setBackground(new java.awt.Color(102, 102, 102));
+        peiBayar.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 30)); // NOI18N
+        peiBayar.setForeground(new java.awt.Color(204, 204, 204));
+        peiBayar.setText("Completion");
+        peiBayar.setToolTipText("");
+        peiBayar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        peiBayar.setMaximumSize(new java.awt.Dimension(100, 30));
+        peiBayar.setMinimumSize(new java.awt.Dimension(100, 30));
+        peiBayar.setPreferredSize(new java.awt.Dimension(100, 30));
+        peiBayar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lookaTon1ActionPerformed(evt);
+                peiBayarActionPerformed(evt);
             }
         });
 
@@ -383,108 +366,108 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         isiDataan.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         isiDataan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Name", "Order", "Quantity", "Total Price", "Status"
+                "No", "Name", "Order", "Quantity", "Total Price", "Date and Time", "Pay Method", "Status"
             }
         ));
         isiDataan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -523,7 +506,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                             .addGroup(bekgronTabelLayout.createSequentialGroup()
                                 .addComponent(panelPilih, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lookaTon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(peiBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(enterNumb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -546,7 +529,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                         .addComponent(enterCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(sigPaid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelPilih, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lookaTon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(peiBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(skrolTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(33, 33, 33))
@@ -609,12 +592,12 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         // Proses update jika semua validasi passed
         try {
             int transactionId = (int) isiDataan.getValueAt(selectedRow, 0); // Ambil ID dari kolom tersembunyi
-            int newQty = Integer.parseInt(newQtyText);
+            int newQty = Integer.parseInt(enterNumb.getText().trim());
 
             // 1. Dapatkan harga produk
-            String getPriceQuery = "SELECT p.price FROM product p "
-                                 + "JOIN transaction t ON p.id = t.product_id "
-                                 + "WHERE t.id = ?";
+            String getPriceQuery = "UPDATE transaction_detail " +
+                                   "SET ordet_totalqty = ?, ordet_amount = ? " +
+                                   "WHERE id = ?";
 
             try (PreparedStatement priceStmt = koneksi.prepareStatement(getPriceQuery)) {
                 priceStmt.setInt(1, transactionId);
@@ -625,9 +608,9 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                     long totalAmount = newQty * price;
 
                     // 2. Update database
-                    String updateQuery = "UPDATE transaction "
-                                       + "SET total_qty = ?, total_amount = ? "
-                                       + "WHERE id = ?";
+                    String updateQuery = "UPDATE transaction " +
+                                         "SET total_qty = ?, total_amount = ? " +
+                                         "WHERE id = ?";
 
                     try (PreparedStatement updateStmt = koneksi.prepareStatement(updateQuery)) {
                         updateStmt.setInt(1, newQty);
@@ -690,6 +673,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                 "Confirm", 
                 JOptionPane.YES_NO_OPTION);
 
+            // Hapus dari transaction_detail
             if (confirm == JOptionPane.YES_OPTION) {
                 // Eksekusi query DELETE langsung menggunakan ID
                 String deleteQuery = "DELETE FROM transaction WHERE id = ?";
@@ -750,9 +734,62 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_enterCariActionPerformed
 
-    private void lookaTon1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lookaTon1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lookaTon1ActionPerformed
+    private void peiBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peiBayarActionPerformed
+        // 1. Validasi baris terpilih
+        int selectedRow = isiDataan.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Pilih transaksi yang ingin diupdate!",
+                "Tidak Ada Seleksi",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // 2. Ambil ID transaksi dari kolom pertama tabel
+        int transactionId = (int) isiDataan.getValueAt(selectedRow, 0);
+
+        // 3. Validasi pilihan status
+        String selectedStatus = antaraPilih.getSelectedValue();
+        if (selectedStatus == null) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Pilih status penyelesaian!",
+                "Status Kosong",
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // 4. Konversi pilihan ke nilai database
+        String dbStatus = selectedStatus.equals("Done") ? "Done" : "Not Done";
+
+        // 5. Eksekusi update
+        try {
+            String query = "UPDATE transaction_detail SET order_done = ? WHERE id = ?";
+            PreparedStatement stmt = koneksi.prepareStatement(query);
+            stmt.setString(1, dbStatus);
+            stmt.setInt(2, transactionId);
+
+            int affectedRows = stmt.executeUpdate();
+            if (affectedRows > 0) {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Status berhasil diupdate ke: " + selectedStatus,
+                    "Update Berhasil",
+                    JOptionPane.INFORMATION_MESSAGE
+                );
+                liatPesanAn(); // Refresh tabel
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Error database: " + ex.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }//GEN-LAST:event_peiBayarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -764,8 +801,8 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
     private javax.swing.JTextField enterNumb;
     private javax.swing.JTable isiDataan;
     private javax.swing.JButton lookaTon;
-    private javax.swing.JButton lookaTon1;
     private javax.swing.JScrollPane panelPilih;
+    private javax.swing.JButton peiBayar;
     private javax.swing.JLabel sigName;
     private javax.swing.JLabel sigPaid;
     private javax.swing.JScrollPane skrolTabel;

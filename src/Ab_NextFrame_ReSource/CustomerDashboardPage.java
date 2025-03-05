@@ -37,7 +37,7 @@ import Aa_MainFrame_ReSource.LoginPage;  // Main Login
 import Ab_NextFrame_ReSource.B_Frame_Customer.CustomerMenuDisplay;
 import Ab_NextFrame_ReSource.B_Frame_Customer.CustomerOrderDisplay;
 import Ab_NextFrame_ReSource.B_Frame_Customer.CustomerReserveDisplay;
-import Ab_NextFrame_ReSource.B_Frame_Customer.Customer__NNN__Display;
+import Z_Archives.B_Frame_Custom.Customer__NNN__Display;
 // Nyari File lain //
 
 /* Main System */

@@ -230,9 +230,10 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setMaximizable(true);
-        setMaximumSize(new java.awt.Dimension(615, 440));
-        setMinimumSize(new java.awt.Dimension(615, 440));
-        setPreferredSize(new java.awt.Dimension(615, 440));
+        setMaximumSize(new java.awt.Dimension(610, 440));
+        setMinimumSize(new java.awt.Dimension(610, 440));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(610, 440));
         setVisible(true);
 
         bekgronDisple.setBackground(new java.awt.Color(51, 0, 102));
@@ -421,7 +422,7 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(skrolPesanan, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                .addComponent(skrolPesanan, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(welKoMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -438,11 +439,11 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();

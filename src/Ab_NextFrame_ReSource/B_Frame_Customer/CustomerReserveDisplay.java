@@ -172,9 +172,9 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setMaximizable(true);
-        setMaximumSize(new java.awt.Dimension(615, 440));
-        setMinimumSize(new java.awt.Dimension(615, 440));
-        setPreferredSize(new java.awt.Dimension(615, 440));
+        setMaximumSize(new java.awt.Dimension(610, 440));
+        setMinimumSize(new java.awt.Dimension(610, 440));
+        setPreferredSize(new java.awt.Dimension(610, 440));
         setVisible(true);
 
         bekgronDisple.setBackground(new java.awt.Color(51, 0, 102));
