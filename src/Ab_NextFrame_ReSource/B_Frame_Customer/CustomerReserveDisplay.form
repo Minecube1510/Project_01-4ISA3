@@ -5,14 +5,16 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
@@ -50,39 +52,48 @@
           <Color blue="66" green="0" red="33" type="rgb"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
       </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="signBayar" max="-2" attributes="0"/>
-                      <Component id="skrolMesankan" alignment="0" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="skrolMesankan" pref="603" max="32767" attributes="0"/>
+                      <Component id="signBayar" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="alliatPesan" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="bayarTon" min="-2" max="-2" attributes="0"/>
+                          <Component id="alliatPesan" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="bayarTon" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="signBayar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="alliatPesan" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="bayarTon" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="skrolMesankan" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="skrolMesankan" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -140,56 +151,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="alliatPesanActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="skrolMesankan">
-          <Properties>
-            <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
-            <Property name="verticalScrollBarPolicy" type="int" value="22"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[570, 250]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[570, 250]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[570, 250]"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTable" name="liatMesankan">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="99" green="99" red="99" type="rgb"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="33" green="33" red="33" type="rgb"/>
-                </Property>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="3" rowCount="4">
-                    <Column editable="true" title="Order" type="java.lang.Object"/>
-                    <Column editable="true" title="Quantity" type="java.lang.Object"/>
-                    <Column editable="true" title="Total Price" type="java.lang.Object"/>
-                  </Table>
-                </Property>
-                <Property name="autoResizeMode" type="int" value="0"/>
-                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[750, 500]"/>
-                </Property>
-                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[750, 500]"/>
-                </Property>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[750, 500]"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="javax.swing.JButton" name="bayarTon">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -221,6 +182,54 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bayarTonActionPerformed"/>
           </Events>
         </Component>
+        <Container class="javax.swing.JScrollPane" name="skrolMesankan">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[570, 275]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[570, 275]"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[570, 275]"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="liatMesankan">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="99" green="99" red="99" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="33" red="33" type="rgb"/>
+                </Property>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="3" rowCount="4">
+                    <Column editable="true" title="Order" type="java.lang.Object"/>
+                    <Column editable="true" title="Quantity" type="java.lang.Object"/>
+                    <Column editable="true" title="Total Price" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+                <Property name="autoResizeMode" type="int" value="4"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[750, 500]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[750, 500]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[750, 500]"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

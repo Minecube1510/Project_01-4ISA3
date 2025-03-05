@@ -348,14 +348,12 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
             }
         });
 
-        skrolTabel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         skrolTabel.setToolTipText("");
-        skrolTabel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         skrolTabel.setViewportBorder(javax.swing.BorderFactory.createEtchedBorder());
-        skrolTabel.setMaximumSize(new java.awt.Dimension(570, 295));
-        skrolTabel.setMinimumSize(new java.awt.Dimension(570, 295));
+        skrolTabel.setMaximumSize(new java.awt.Dimension(590, 295));
+        skrolTabel.setMinimumSize(new java.awt.Dimension(590, 295));
         skrolTabel.setName(""); // NOI18N
-        skrolTabel.setPreferredSize(new java.awt.Dimension(570, 295));
+        skrolTabel.setPreferredSize(new java.awt.Dimension(590, 295));
 
         isiDataan.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         isiDataan.setModel(new javax.swing.table.DefaultTableModel(
@@ -418,12 +416,9 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
         bekgronTabel.setLayout(bekgronTabelLayout);
         bekgronTabelLayout.setHorizontalGroup(
             bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bekgronTabelLayout.createSequentialGroup()
-                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bekgronTabelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(skrolTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bekgronTabelLayout.createSequentialGroup()
+            .addGroup(bekgronTabelLayout.createSequentialGroup()
+                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bekgronTabelLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(bekgronTabelLayout.createSequentialGroup()
@@ -433,14 +428,11 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
                                         .addComponent(deleTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(cariTon, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(bekgronTabelLayout.createSequentialGroup()
-                                        .addComponent(sigNumb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(enterNumb, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(enterNid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(enterCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(sigNumb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enterNumb, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(enterNid, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(bekgronTabelLayout.createSequentialGroup()
                                 .addGroup(bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -452,8 +444,14 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(enterName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(sigNid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(5, 5, 5))
+                                .addComponent(sigNid, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(bekgronTabelLayout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addComponent(enterCari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(bekgronTabelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(skrolTabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         bekgronTabelLayout.setVerticalGroup(
             bekgronTabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

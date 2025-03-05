@@ -5,14 +5,17 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="maximum" type="boolean" value="true"/>
     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[600, 500]"/>
+      <Dimension value="[615, 440]"/>
     </Property>
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
@@ -34,12 +37,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="bekgronDisple" alignment="0" max="32767" attributes="0"/>
+          <Component id="bekgronDisple" alignment="0" pref="625" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="bekgronDisple" alignment="0" max="32767" attributes="0"/>
+          <Component id="bekgronDisple" alignment="0" pref="450" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -50,6 +53,15 @@
           <Color blue="66" green="0" red="33" type="rgb"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Sub-Panel Background"/>
+        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
+        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[615, 440]"/>
+        </Property>
       </Properties>
 
       <Layout>
@@ -57,22 +69,19 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="welKoMenu" min="-2" max="-2" attributes="0"/>
-                      <Component id="skrolPesanan" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <Component id="skrolPesanan" pref="613" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Component id="welKoMenu" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="welKoMenu" min="-2" max="-2" attributes="0"/>
+                  <Component id="welKoMenu" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="skrolPesanan" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="87" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

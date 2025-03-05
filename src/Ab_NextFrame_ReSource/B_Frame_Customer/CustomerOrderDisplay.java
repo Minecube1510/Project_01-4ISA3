@@ -74,7 +74,7 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI liatkan = (BasicInternalFrameUI)this.getUI();
-        liatkan.setNorthPane(null);
+        //liatkan.setNorthPane(null);
         
         //
     }
@@ -99,13 +99,18 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
         minList = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(600, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setClosable(true);
+        setMaximizable(true);
+        setMaximumSize(new java.awt.Dimension(615, 440));
+        setMinimumSize(new java.awt.Dimension(615, 440));
+        setPreferredSize(new java.awt.Dimension(615, 440));
         setVisible(true);
 
         bekgronDisple.setBackground(new java.awt.Color(51, 0, 102));
         bekgronDisple.setToolTipText("");
+        bekgronDisple.setMaximumSize(new java.awt.Dimension(615, 440));
+        bekgronDisple.setMinimumSize(new java.awt.Dimension(615, 440));
+        bekgronDisple.setPreferredSize(new java.awt.Dimension(615, 440));
 
         signOrdering.setFont(new java.awt.Font("Monotype Corsiva", 3, 36)); // NOI18N
         signOrdering.setForeground(new java.awt.Color(51, 255, 0));
@@ -199,54 +204,49 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
         bekgronDispleLayout.setHorizontalGroup(
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(skrolMesan, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bekgronDispleLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(signOrdering, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bekgronDispleLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(skrolMesan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(bekgronDispleLayout.createSequentialGroup()
-                                .addComponent(inviTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(minList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(liatMesan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sigInvite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(isiNgundang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(34, 43, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bekgronDispleLayout.createSequentialGroup()
+                        .addComponent(inviTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(minList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(liatMesan, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(sigInvite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(isiNgundang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addComponent(signOrdering, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         bekgronDispleLayout.setVerticalGroup(
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(signOrdering, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(signOrdering, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bekgronDispleLayout.createSequentialGroup()
                         .addComponent(liatMesan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(sigInvite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(isiNgundang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(inviTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(minList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(skrolMesan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 294, Short.MAX_VALUE))
+                            .addComponent(inviTon, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(minList, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(skrolMesan, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(158, 158, 158))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         pack();

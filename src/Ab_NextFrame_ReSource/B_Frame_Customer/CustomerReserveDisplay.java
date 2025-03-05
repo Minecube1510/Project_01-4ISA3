@@ -103,8 +103,8 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI liatkan = (BasicInternalFrameUI)this.getUI();
-        liatkan.setNorthPane(null);
-        
+        //liatkan.setNorthPane(null);
+
         //meliatMesan();
     }
 
@@ -114,6 +114,7 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
     //
 
     public void meliatMesan() {
+        transactionIds.clear();  // Reset list setiap kali refresh
         DefaultTableModel model = (DefaultTableModel) liatMesankan.getModel();
         model.setRowCount(0); // Reset tabel
 
@@ -128,7 +129,7 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
             }
 
             // Query SQL dengan parameter
-            String sql = "SELECT p.pro_name, t.total_qty, t.total_amount "
+            String sql = "SELECT t.id, p.pro_name, t.total_qty, t.total_amount " // Tambah kolom t.id
                        + "FROM transaction t "
                        + "JOIN customer c ON t.customer_id = c.id "
                        + "JOIN product p ON t.product_id = p.id "
@@ -140,14 +141,16 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
                 // Isi data ke tabel
                 try (ResultSet rs = pst.executeQuery()) {
                     // Isi data ke tabel
-                    while (rs.next()) {
-                        String productName = rs.getString("pro_name");
-                        int quantity = rs.getInt("total_qty");
-                        long totalPrice = (long) rs.getDouble("total_amount");
-                        //String dateTime = rs.getString("order_datetime");
-                        
-                        model.addRow(new Object[]{productName, quantity, totalPrice});
-                    }
+                        while (rs.next()) {
+                            int transactionId = rs.getInt("id"); // Ambil ID transaksi
+                            transactionIds.add(transactionId); // Simpan ke list
+
+                            model.addRow(new Object[]{
+                                rs.getString("pro_name"),
+                                rs.getInt("total_qty"),
+                                rs.getLong("total_amount")
+                            });
+                        }
                 }
             }
         } catch (SQLException ex) {
@@ -162,18 +165,23 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
         bekgronDisple = new javax.swing.JPanel();
         signBayar = new javax.swing.JLabel();
         alliatPesan = new javax.swing.JButton();
+        bayarTon = new javax.swing.JButton();
         skrolMesankan = new javax.swing.JScrollPane();
         liatMesankan = new javax.swing.JTable();
-        bayarTon = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(600, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setClosable(true);
+        setMaximizable(true);
+        setMaximumSize(new java.awt.Dimension(615, 440));
+        setMinimumSize(new java.awt.Dimension(615, 440));
+        setPreferredSize(new java.awt.Dimension(615, 440));
         setVisible(true);
 
         bekgronDisple.setBackground(new java.awt.Color(51, 0, 102));
         bekgronDisple.setToolTipText("");
+        bekgronDisple.setMaximumSize(new java.awt.Dimension(615, 440));
+        bekgronDisple.setMinimumSize(new java.awt.Dimension(615, 440));
+        bekgronDisple.setPreferredSize(new java.awt.Dimension(615, 440));
 
         signBayar.setFont(new java.awt.Font("Monotype Corsiva", 3, 36)); // NOI18N
         signBayar.setForeground(new java.awt.Color(51, 255, 0));
@@ -197,32 +205,6 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
             }
         });
 
-        skrolMesankan.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        skrolMesankan.setToolTipText("");
-        skrolMesankan.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        skrolMesankan.setMaximumSize(new java.awt.Dimension(570, 250));
-        skrolMesankan.setMinimumSize(new java.awt.Dimension(570, 250));
-        skrolMesankan.setPreferredSize(new java.awt.Dimension(570, 250));
-
-        liatMesankan.setBackground(new java.awt.Color(153, 153, 153));
-        liatMesankan.setForeground(new java.awt.Color(51, 51, 51));
-        liatMesankan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Order", "Quantity", "Total Price"
-            }
-        ));
-        liatMesankan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        liatMesankan.setMaximumSize(new java.awt.Dimension(750, 500));
-        liatMesankan.setMinimumSize(new java.awt.Dimension(750, 500));
-        liatMesankan.setPreferredSize(new java.awt.Dimension(750, 500));
-        skrolMesankan.setViewportView(liatMesankan);
-
         bayarTon.setBackground(new java.awt.Color(102, 102, 102));
         bayarTon.setFont(new java.awt.Font("Microsoft Tai Le", 1, 32)); // NOI18N
         bayarTon.setForeground(new java.awt.Color(204, 204, 204));
@@ -237,20 +219,44 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
             }
         });
 
+        skrolMesankan.setToolTipText("");
+        skrolMesankan.setMaximumSize(new java.awt.Dimension(570, 275));
+        skrolMesankan.setMinimumSize(new java.awt.Dimension(570, 275));
+        skrolMesankan.setPreferredSize(new java.awt.Dimension(570, 275));
+
+        liatMesankan.setBackground(new java.awt.Color(153, 153, 153));
+        liatMesankan.setForeground(new java.awt.Color(51, 51, 51));
+        liatMesankan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Order", "Quantity", "Total Price"
+            }
+        ));
+        liatMesankan.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        liatMesankan.setMaximumSize(new java.awt.Dimension(750, 500));
+        liatMesankan.setMinimumSize(new java.awt.Dimension(750, 500));
+        liatMesankan.setPreferredSize(new java.awt.Dimension(750, 500));
+        skrolMesankan.setViewportView(liatMesankan);
+
         javax.swing.GroupLayout bekgronDispleLayout = new javax.swing.GroupLayout(bekgronDisple);
         bekgronDisple.setLayout(bekgronDispleLayout);
         bekgronDispleLayout.setHorizontalGroup(
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(signBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(skrolMesankan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(skrolMesankan, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                    .addComponent(signBayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(bekgronDispleLayout.createSequentialGroup()
-                        .addComponent(alliatPesan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bayarTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addComponent(alliatPesan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bayarTon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         bekgronDispleLayout.setVerticalGroup(
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,8 +268,8 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
                     .addComponent(alliatPesan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bayarTon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(skrolMesankan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addComponent(skrolMesankan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(41, 41, 41))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,16 +290,35 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
         meliatMesan();
     }//GEN-LAST:event_alliatPesanActionPerformed
 
+    private List<Integer> transactionIds = new ArrayList<>();
+    //
     private void bayarTonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bayarTonActionPerformed
+
+        // Validasi pemilihan baris
+        int selectedRow = liatMesankan.getSelectedRow();
+        if(selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, 
+                "Pilih 1 pesanan yang akan dibayar!", 
+                "Error", 
+                JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
+
+        // Ambil ID transaksi TERPILIH saja
+        int selectedTransactionId = transactionIds.get(selectedRow); // <-- Perubahan kunci
 
         String identiNama01 = kirimNilai("Faren");
         String userNama = MegangData.dapatNamae();
 
-        // Handle jika userNama null atau kosong
+        // Check if userNama is null or empty
         if (userNama == null || userNama.trim().isEmpty()) {
-            userNama = identiNama01; // Fallback ke default
+            userNama = identiNama01;
         }
+        //
+        String kueri = "SELECT total_amount, total_qty FROM transaction WHERE id = ?";
 
+        // 1. Pilih metode pembayaran
         String[] options = {"Cash", "Online Payment"};
         String paymentMethod = (String) JOptionPane.showInputDialog(
             this,
@@ -301,77 +326,79 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
             "Pembayaran",
             JOptionPane.QUESTION_MESSAGE,
             null,
-            options, options[0]);
+            options, 
+            options[0]
+        );
+        if (paymentMethod == null) return; // User canceled
 
-        if (paymentMethod == null) return;
-
-        int confirm = JOptionPane.showConfirmDialog(
+        // 2. Dialog area pengiriman
+        String[] areaOptions = {"Dalam Jabodetabek", "Luar Jabodetabek"};
+        String deliveryArea = (String) JOptionPane.showInputDialog(
             this,
-            "Konfirmasi pembayaran dengan " + paymentMethod + "?",
-            "Konfirmasi",
-            JOptionPane.YES_NO_OPTION);
+            "Apakah pengiriman dalam wilayah Jabodetabek?",
+            "Area Pengiriman",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            areaOptions,
+            areaOptions[0]
+        );
+        if (deliveryArea == null) return; // User canceled
 
-        if (confirm != JOptionPane.YES_OPTION) return;
+        // 3. Hitung biaya pengiriman
+        long shippingPercentage = (long) (deliveryArea.equals("Dalam Jabodetabek") ? 2L : 5L);
 
         try {
-            // 1. Ambil Customer ID
-            String customerId = null;
-            String checkCustomerSql = "SELECT id FROM customer WHERE LOWER(name) = LOWER(?)";
-            try (PreparedStatement checkPst = koneksi.prepareStatement(checkCustomerSql)) {
-                checkPst.setString(1, userNama);
-                ResultSet checkRs = checkPst.executeQuery();
-                if (!checkRs.next()) {
-                    JOptionPane.showMessageDialog(this, "Customer tidak ditemukan!");
-                    return;
+            // 4. Ambil totalAmount dan totalQty dari database
+            String sql = "SELECT total_amount, total_qty " +
+                         "FROM transaction " +
+                         "WHERE id = ?";
+            try (PreparedStatement pst = koneksi.prepareStatement(sql)) {
+                pst.setInt(1, selectedTransactionId);
+                try (ResultSet rs = pst.executeQuery()) {
+                    if (rs.next()) {
+                        long totalAmount = rs.getLong("total_amount");
+                        int totalQty = rs.getInt("total_qty");
+
+                        // 5. Hitung total baru dengan ongkir
+                        long shippingCost = (long) (totalAmount * shippingPercentage) / 100;
+                        long newTotalAmount = totalAmount + shippingCost;
+
+                        // 6. Konfirmasi dengan info tambahan ongkir
+                        String confirmMsg;
+                        confirmMsg = String.format(
+                            "Konfirmasi pembayaran dengan %s?\nBiaya pengiriman %d%% (Rp%,d)\nTotal menjadi: Rp%,d",
+                            paymentMethod,
+                            shippingPercentage, // %d untuk long
+                            shippingCost,
+                            newTotalAmount
+                        );
+
+                        int confirm = JOptionPane.showConfirmDialog(
+                            this,
+                            confirmMsg,
+                            "Konfirmasi",
+                            JOptionPane.YES_NO_OPTION
+                        );
+                        if (confirm != JOptionPane.YES_OPTION) return; // User canceled
+
+                        // 7. Update nilai yang dimasukkan ke database
+                        String insertSql = "INSERT INTO transaction_detail (transaction_id, ordet_amount, ordet_totalqty, order_datetime, pay_method, order_done) VALUES (?, ?, ?, NOW(), ?, 'Not Done')";
+                        try (PreparedStatement insertPst = koneksi.prepareStatement(insertSql)) {
+                            insertPst.setInt(1, selectedTransactionId); // Kolom INT → setInt()
+                            insertPst.setLong(2, newTotalAmount); // Kolom BIGINT → setLong()
+                            insertPst.setString(3, String.valueOf(totalQty)); // Kolom VARCHAR → setString()
+                            insertPst.setString(4, paymentMethod);
+                            insertPst.executeUpdate();
+                        }
+
+                        JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Tidak ada transaksi ditemukan untuk pengguna ini.");
+                    }
                 }
-                customerId = checkRs.getString("id");
             }
-
-            // 2. Ambil Transaction IDs
-            List<String> transactionIds = new ArrayList<>();
-            String selectSql = "SELECT id FROM transaction WHERE customer_id = ?";
-            try (PreparedStatement pst = koneksi.prepareStatement(selectSql)) {
-                pst.setString(1, customerId);
-                ResultSet rs = pst.executeQuery();
-                while (rs.next()) {
-                    transactionIds.add(rs.getString("id"));
-                }
-            }
-
-            // 3. Hitung Total Amount & Qty
-            long totalAmount = 0;
-            int totalQty = 0;
-            String sumSql = "SELECT SUM(total_amount) AS total_amount_sum, SUM(total_qty) AS total_qty_sum " +
-                            "FROM transaction WHERE customer_id = ?";
-            try (PreparedStatement sumPst = koneksi.prepareStatement(sumSql)) {
-                sumPst.setString(1, customerId);
-                ResultSet sumRs = sumPst.executeQuery();
-                if (sumRs.next()) {
-                    totalAmount = sumRs.getLong("total_amount_sum");
-                    totalQty = sumRs.getInt("total_qty_sum");
-                }
-            }
-            // 4. Eksekusi INSERT ke transaction_detail
-            String insertSql = "INSERT INTO transaction_detail (transaction_id, ordet_amount, ordet_totalqty, order_datetime, pay_method, order_done) " +
-                               "VALUES (?, ?, ?, NOW(), ?, 'Not Done')";
-            try (PreparedStatement pst = koneksi.prepareStatement(insertSql)) {
-                pst.setString(1, String.join(",", transactionIds)); // Concatenated IDs
-                pst.setDouble(2, totalAmount); // SUM(total_amount)
-                pst.setInt(3, totalQty); // SUM(total_qty)
-                pst.setString(4, paymentMethod); // Dari input pengguna
-                pst.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
-            }
-
-            try (PreparedStatement pst = koneksi.prepareStatement(insertSql)) {
-                // ... (proses insert)
-                JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
-            }
-
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, 
-                "Error Database:\n" + ex.getMessage() + 
-                "\nPastikan tabel 'transaction' dan 'customer' terhubung!");
+            JOptionPane.showMessageDialog(this, "Error Database:\n" + ex.getMessage());
         }
 
     }//GEN-LAST:event_bayarTonActionPerformed

@@ -143,10 +143,10 @@ public class LoginPage extends javax.swing.JFrame {
         judulTempatBisnis.setAlignmentY(0.0F);
         judulTempatBisnis.setDoubleBuffered(true);
         judulTempatBisnis.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        judulTempatBisnis.setMaximumSize(new java.awt.Dimension(800, 150));
-        judulTempatBisnis.setMinimumSize(new java.awt.Dimension(800, 150));
+        judulTempatBisnis.setMaximumSize(new java.awt.Dimension(800, 170));
+        judulTempatBisnis.setMinimumSize(new java.awt.Dimension(800, 170));
         judulTempatBisnis.setName("Name Title"); // NOI18N
-        judulTempatBisnis.setPreferredSize(new java.awt.Dimension(800, 150));
+        judulTempatBisnis.setPreferredSize(new java.awt.Dimension(800, 170));
         judulTempatBisnis.setRequestFocusEnabled(false);
 
         namaPelakuan.setFont(new java.awt.Font("Playbill", 1, 40)); // NOI18N
@@ -242,43 +242,45 @@ public class LoginPage extends javax.swing.JFrame {
         mainBekgronLayout.setHorizontalGroup(
             mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainBekgronLayout.createSequentialGroup()
-                .addComponent(judulTempatBisnis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainBekgronLayout.createSequentialGroup()
-                .addGap(123, 123, 123)
-                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(judulTempatBisnis, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(mainBekgronLayout.createSequentialGroup()
-                        .addComponent(namaPelakuan, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(isiNama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(mainBekgronLayout.createSequentialGroup()
-                        .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainBekgronLayout.createSequentialGroup()
-                                .addComponent(goLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(addCustomIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(isiNoTelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(107, 107, 107))
+                                .addComponent(namaPelakuan, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(isiNama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(mainBekgronLayout.createSequentialGroup()
+                                .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(mainBekgronLayout.createSequentialGroup()
+                                        .addComponent(goLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(addCustomIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(isiNoTelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(105, 105, 105)))
+                .addContainerGap())
         );
         mainBekgronLayout.setVerticalGroup(
             mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainBekgronLayout.createSequentialGroup()
-                .addComponent(judulTempatBisnis, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(judulTempatBisnis, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(namaPelakuan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(isiNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(isiNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(noTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(isiNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(mainBekgronLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(goLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addCustomIn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(73, Short.MAX_VALUE))
+                    .addComponent(goLogIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addCustomIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(124, 124, 124))
         );
 
         judulTempatBisnis.getAccessibleContext().setAccessibleName("");
@@ -305,9 +307,7 @@ public class LoginPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(mainBekgron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(mainBekgron, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

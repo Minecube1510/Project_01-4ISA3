@@ -99,7 +99,7 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
         BasicInternalFrameUI liatkan = (BasicInternalFrameUI)this.getUI();
-        liatkan.setNorthPane(null);
+        //liatkan.setNorthPane(null);
         
         //
 
@@ -228,13 +228,18 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         daftarMinta = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(600, 500));
-        setMinimumSize(new java.awt.Dimension(600, 500));
-        setPreferredSize(new java.awt.Dimension(600, 500));
+        setClosable(true);
+        setMaximizable(true);
+        setMaximumSize(new java.awt.Dimension(615, 440));
+        setMinimumSize(new java.awt.Dimension(615, 440));
+        setPreferredSize(new java.awt.Dimension(615, 440));
         setVisible(true);
 
         bekgronDisple.setBackground(new java.awt.Color(51, 0, 102));
         bekgronDisple.setToolTipText("Sub-Panel Background");
+        bekgronDisple.setMaximumSize(new java.awt.Dimension(615, 440));
+        bekgronDisple.setMinimumSize(new java.awt.Dimension(615, 440));
+        bekgronDisple.setPreferredSize(new java.awt.Dimension(615, 440));
 
         welKoMenu.setFont(new java.awt.Font("Monotype Corsiva", 3, 36)); // NOI18N
         welKoMenu.setForeground(new java.awt.Color(51, 255, 0));
@@ -416,30 +421,28 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(welKoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(skrolPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addComponent(skrolPesanan, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(welKoMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         bekgronDispleLayout.setVerticalGroup(
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(welKoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(welKoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(skrolPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bekgronDisple, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
         );
 
         pack();
