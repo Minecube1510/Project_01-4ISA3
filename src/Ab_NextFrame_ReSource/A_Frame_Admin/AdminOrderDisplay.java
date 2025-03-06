@@ -79,7 +79,8 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
 
         // Editing Header Table
         DefaultTableModel model = new DefaultTableModel(new String[]{
-            "No", "Name", "Order", "Quantity", "Total Price", "Date and Time", "Pay Method", "Status"}, 0) { // Kolom baru "ID"
+            "No", "Name", "Order", "Quantity", "Total Price",
+            "Date and Time", "Pay Method", "Status"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -138,8 +139,11 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
 
         try {
             koneksi = DriverManager.getConnection(url, user, pass);
-        } catch(SQLException ex) {
-            System.out.println("Error" + ": " + ex.getMessage());
+        } catch(SQLException ex) {//System.out.println("Error" + ": " + ex.getMessage());
+            JOptionPane.showMessageDialog(this,
+                    "Database Error: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,0,0,0));
@@ -196,9 +200,9 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                 });
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, 
-                "Database Error: " + ex.getMessage(), 
-                "Error", 
+            JOptionPane.showMessageDialog(this,
+                "Database Error: " + ex.getMessage(),
+                "Error",
                 JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -557,8 +561,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         // Validasi 1: Pastikan baris terpilih
         int selectedRow = isiDataan.getSelectedRow();
         if (selectedRow == -1) {
-            JOptionPane.showMessageDialog(
-                null, 
+            JOptionPane.showMessageDialog(null,
                 "Choose the Transaction you want update!",
                 "Unchoosen Table",
                 JOptionPane.WARNING_MESSAGE);
@@ -570,19 +573,17 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
 
         // Cek apakah field kosong
         if (newQtyText.isEmpty()) {
-            JOptionPane.showMessageDialog(
-                null, 
+            JOptionPane.showMessageDialog(null,
                 "Fill the Quantity you want to update!",
-                "Unfilled Quantity",
+                "Unfilled Text",
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         // Cek format angka dengan regex
         if (!newQtyText.matches("^[1-9]\\d*$")) { // Hanya angka > 0
-            JOptionPane.showMessageDialog(
-                null, 
-                "Don't make it Negative!", 
+            JOptionPane.showMessageDialog(null,
+                "Don't make it Negative!",
                 "Wrong Format",
                 JOptionPane.WARNING_MESSAGE);
             enterNumb.setText(""); // Reset field
@@ -624,8 +625,8 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                                 null, 
                                 """
                                 Update Product Quantity Successfully!
-                                Total: Rp""" + totalAmount,
-                                "Successful Update",
+                                Total: Rp""" + " " + totalAmount,
+                                "Successful Updated",
                                 JOptionPane.INFORMATION_MESSAGE);
                             liatPesanAn(); // Refresh tabel
                             enterNumb.setText(""); // Kosongkan field setelah update
@@ -634,14 +635,12 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(
-                null, 
-                "Database Error: " + ex.getMessage(), 
-                "Error", 
+            JOptionPane.showMessageDialog(null,
+                "Database Error: " + ex.getMessage(),
+                "Error",
                 JOptionPane.ERROR_MESSAGE);
         } catch (HeadlessException | NumberFormatException ex) {
-            JOptionPane.showMessageDialog(
-                null, 
+            JOptionPane.showMessageDialog(null,
                 "Getting Error: " + ex.getMessage(),
                 "Error",
                 JOptionPane.ERROR_MESSAGE);
@@ -674,7 +673,7 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                 JOptionPane.YES_NO_OPTION);
 
             // Hapus dari transaction_detail
-            if (confirm == JOptionPane.YES_OPTION) {
+            if (confirm == JOptionPane.YES_OPTION) {  // Konfirmasi
                 // Eksekusi query DELETE langsung menggunakan ID
                 String deleteQuery = "DELETE FROM transaction WHERE id = ?";
                 try (PreparedStatement deleteStmt = koneksi.prepareStatement(deleteQuery)) {
@@ -682,7 +681,10 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
                     int affectedRows = deleteStmt.executeUpdate();
 
                     if (affectedRows > 0) {
-                        JOptionPane.showMessageDialog(null, "Deleteing the Transaction!");
+                        JOptionPane.showMessageDialog(null,
+                                "Deleteing the Transaction!",
+                                "Successfully Deleted",
+                                JOptionPane.INFORMATION_MESSAGE);
                         liatPesanAn(); // Refresh tabel
                     }
                 }
@@ -740,8 +742,8 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         if (selectedRow == -1) {
             JOptionPane.showMessageDialog(
                 null,
-                "Pilih transaksi yang ingin diupdate!",
-                "Tidak Ada Seleksi",
+                "Choose transaction that to be update!",
+                "Unchoosen Table",
                 JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -754,10 +756,9 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
         if (selectedStatus == null) {
             JOptionPane.showMessageDialog(
                 null,
-                "Pilih status penyelesaian!",
-                "Status Kosong",
-                JOptionPane.WARNING_MESSAGE
-            );
+                "Choose the Payment status!",
+                "Empty Status",
+                JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -775,19 +776,17 @@ public final class AdminOrderDisplay extends javax.swing.JInternalFrame {
             if (affectedRows > 0) {
                 JOptionPane.showMessageDialog(
                     null,
-                    "Status berhasil diupdate ke: " + selectedStatus,
-                    "Update Berhasil",
-                    JOptionPane.INFORMATION_MESSAGE
-                );
+                    "Payment is" + ": " + selectedStatus,
+                    "Successfully Updated",
+                    JOptionPane.INFORMATION_MESSAGE);
                 liatPesanAn(); // Refresh tabel
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(
                 null,
-                "Error database: " + ex.getMessage(),
+                "Database Error: " + ex.getMessage(),
                 "Error",
-                JOptionPane.ERROR_MESSAGE
-            );
+                JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_peiBayarActionPerformed
 

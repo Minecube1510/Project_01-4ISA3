@@ -112,8 +112,8 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
     public void nyaringMakan() {
         if (koneksi == null) {
             JOptionPane.showMessageDialog(null, 
-                    "Something is Error...",
-                    "Error",
+                    "Make sure for the connection!",
+                    "Connection Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -140,7 +140,7 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
                     "Database Error: " + ex.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
-            aturMintaReq.addItem("Error: Database Checking"); // Default item jika error
+            //aturMintaReq.addItem("Error: Database Checking");  // Default item jika error
         }
     }
     //
@@ -561,8 +561,10 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
             psProduct.close();
 
             // [4] Insert ke tabel transaction (total_qty = 1, total_amount = harga produk)
-            String insertTransaction = "INSERT INTO transaction (customer_id, product_id, total_amount, total_qty) VALUES (?, ?, ?, ?)";
-            psTransaction = koneksi.prepareStatement(insertTransaction, PreparedStatement.RETURN_GENERATED_KEYS);
+            String insertTransaction = "INSERT INTO transaction (" +
+                    "customer_id, product_id, total_amount, total_qty) VALUES (?, ?, ?, ?)";
+            psTransaction = koneksi.prepareStatement(insertTransaction,
+                    PreparedStatement.RETURN_GENERATED_KEYS);
             psTransaction.setInt(1, customerId);
             psTransaction.setInt(2, productId);
             psTransaction.setLong(3, price); // Asumsi satu item
@@ -586,7 +588,7 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this,
                 """
                 The Orders successfully added!
-                Transaction ID: """ + transactionId,
+                Transaction ID: """ + " " + transactionId,
                 "Added Succsesfully",
                 JOptionPane.INFORMATION_MESSAGE);
 
@@ -675,13 +677,13 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
             int rowsUpdated = ps.executeUpdate();
             if (rowsUpdated > 0) {
                 JOptionPane.showMessageDialog(this,
-                    "Successfully saving the notes!",
-                    "Success Added Note",
+                    "Successfully saving the Notes!",
+                    "Successfully Added",
                     JOptionPane.WARNING_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this,
-                    "Failed saving the notes!",
-                    "Saving Failed",
+                    "Failed saving the Notes...",
+                    "Failed Adding",
                     JOptionPane.WARNING_MESSAGE);
             }
         } catch (SQLException ex) {

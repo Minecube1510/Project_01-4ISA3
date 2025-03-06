@@ -154,7 +154,10 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this,
+                    "Error: " + ex.getMessage(),
+                    "",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -297,11 +300,10 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
         // Validasi pemilihan baris
         int selectedRow = liatMesankan.getSelectedRow();
         if(selectedRow == -1) {
-            JOptionPane.showMessageDialog(this, 
-                "Pilih 1 pesanan yang akan dibayar!", 
-                "Error", 
-                JOptionPane.WARNING_MESSAGE
-            );
+            JOptionPane.showMessageDialog(this,
+                "Choose the Table that for Payment!",
+                "Unchoosen Table",
+                JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -320,32 +322,24 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
 
         // 1. Pilih metode pembayaran
         String[] options = {"Cash", "Online Payment"};
-        String paymentMethod = (String) JOptionPane.showInputDialog(
-            this,
-            "Pilih metode pembayaran:",
-            "Pembayaran",
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            options, 
-            options[0]
-        );
+        String paymentMethod = (String) JOptionPane.showInputDialog(this,
+                "Choosing Payment Method" + ":",
+                "Payment Method",
+                JOptionPane.QUESTION_MESSAGE, null,
+                options, options[0]);
         if (paymentMethod == null) return; // User canceled
 
         // 2. Dialog area pengiriman
-        String[] areaOptions = {"Dalam Jabodetabek", "Luar Jabodetabek"};
-        String deliveryArea = (String) JOptionPane.showInputDialog(
-            this,
-            "Apakah pengiriman dalam wilayah Jabodetabek?",
-            "Area Pengiriman",
-            JOptionPane.QUESTION_MESSAGE,
-            null,
-            areaOptions,
-            areaOptions[0]
-        );
+        String[] areaOptions = {"In Jabodetabek", "Out Jabodetabek"};
+        String deliveryArea = (String) JOptionPane.showInputDialog(this,
+                "Are you in Jabodetabek area?",
+                "Area Pengiriman",
+                JOptionPane.QUESTION_MESSAGE, null,
+                areaOptions,areaOptions[0]);
         if (deliveryArea == null) return; // User canceled
 
         // 3. Hitung biaya pengiriman
-        long shippingPercentage = (long) (deliveryArea.equals("Dalam Jabodetabek") ? 2L : 5L);
+        long shippingPercentage = (long) (deliveryArea.equals("In Jabodetabek") ? 2L : 5L);
 
         try {
             // 4. Ambil totalAmount dan totalQty dari database
@@ -365,24 +359,29 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
 
                         // 6. Konfirmasi dengan info tambahan ongkir
                         String confirmMsg;
-                        confirmMsg = String.format(
-                            "Konfirmasi pembayaran dengan %s?\nBiaya pengiriman %d%% (Rp%,d)\nTotal menjadi: Rp%,d",
-                            paymentMethod,
-                            shippingPercentage, // %d untuk long
-                            shippingCost,
-                            newTotalAmount
-                        );
+                        confirmMsg = String.format("""
+                                                   Confirm Payment with %s?
+                                                   Payment Pricing: %d%% (Rp%,d)
+                                                   Totaling: Rp%,d""",
+                                paymentMethod,
+                                shippingPercentage, // %d untuk long
+                                shippingCost,
+                                newTotalAmount);
 
                         int confirm = JOptionPane.showConfirmDialog(
                             this,
                             confirmMsg,
-                            "Konfirmasi",
-                            JOptionPane.YES_NO_OPTION
-                        );
-                        if (confirm != JOptionPane.YES_OPTION) return; // User canceled
+                            "Confirmation",
+                            JOptionPane.YES_NO_OPTION);
+                        //
+                        if (confirm != JOptionPane.YES_OPTION)
+                            return;  // User is cancelling
 
                         // 7. Update nilai yang dimasukkan ke database
-                        String insertSql = "INSERT INTO transaction_detail (transaction_id, ordet_amount, ordet_totalqty, order_datetime, pay_method, order_done) VALUES (?, ?, ?, NOW(), ?, 'Not Done')";
+                        String insertSql = "INSERT INTO transaction_detail (" +
+                                "transaction_id, ordet_amount, ordet_totalqty, " +
+                                "order_datetime, pay_method, order_done" + ") " +
+                                "VALUES (?, ?, ?, NOW(), ?, 'Not Done')";
                         try (PreparedStatement insertPst = koneksi.prepareStatement(insertSql)) {
                             insertPst.setInt(1, selectedTransactionId); // Kolom INT → setInt()
                             insertPst.setLong(2, newTotalAmount); // Kolom BIGINT → setLong()
@@ -391,14 +390,23 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
                             insertPst.executeUpdate();
                         }
 
-                        JOptionPane.showMessageDialog(this, "Pembayaran berhasil!");
+                        JOptionPane.showMessageDialog(this,
+                                "Payment is Success!",
+                                "Successfully Update",
+                                JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(this, "Tidak ada transaksi ditemukan untuk pengguna ini.");
+                        JOptionPane.showMessageDialog(this,
+                                "No transaction is Found in here!",
+                                "Transaction Not Found",
+                                JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error Database:\n" + ex.getMessage());
+            JOptionPane.showMessageDialog(this,
+                    "Error Database" + ": " + ex.getMessage(),
+                    "",
+                    JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_bayarTonActionPerformed

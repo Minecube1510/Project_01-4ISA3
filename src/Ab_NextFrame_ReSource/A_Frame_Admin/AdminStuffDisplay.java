@@ -637,7 +637,7 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
         if (naMenu.isEmpty() || stockIn.isEmpty() || priceIn.isEmpty()) {
             JOptionPane.showMessageDialog(null,
                     "Fill it!",
-                    "Unfilled",
+                    "Unfilled Text",
                     JOptionPane.WARNING_MESSAGE);
             return; // Keluar dari metode jika ada field yang kosong
         }
@@ -709,7 +709,8 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             long aturkaya = Long.parseLong(enterPricen.getText().trim());
 
             // Bangun query dinamis
-            StringBuilder kueri = new StringBuilder("UPDATE product SET pro_name = ?, category = ?, stock = ?, price = ?");
+            StringBuilder kueri = new StringBuilder("UPDATE " + 
+                    "product" + " SET " + "pro_name = ?, category = ?, stock = ?, price = ?");
             if (updateDesc) {
                 kueri.append(", pro_desc = ?"); // Tambahkan kolom deskripsi hanya jika diisi
             }
@@ -731,8 +732,13 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             stmt.setInt(paramIndex, lamaId); // WHERE id
 
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Updated Data!");
+            //
+            JOptionPane.showMessageDialog(null,
+                    "Updated Data!",
+                    "Successfully Updated",
+                    JOptionPane.INFORMATION_MESSAGE);
             liatEnak(); // Refresh tabel
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null,
                     "Price must be number!",
@@ -772,7 +778,10 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             stmt.setInt(1, id);
             stmt.executeUpdate();
             //
-            JOptionPane.showMessageDialog(null, "Deleting the Product!");
+            JOptionPane.showMessageDialog(null,
+                    "Deleting the Product!",
+                    "Successfully Deleted",
+                    JOptionPane.INFORMATION_MESSAGE);
             liatEnak();  // Refresh tabel setelah menghapus products
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,

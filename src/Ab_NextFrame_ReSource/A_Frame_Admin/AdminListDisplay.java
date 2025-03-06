@@ -51,7 +51,8 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
         initComponents();
 
         // Editing Header Table
-        DefaultTableModel model = new DefaultTableModel(new String[]{"ID", "Name", "Telephone", "Noted"}, 0) {
+        DefaultTableModel model = new DefaultTableModel(new String[]{
+            "ID", "Name", "Telephone", "Noted"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Tidak dapat diedit
@@ -648,7 +649,10 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
             //
             stmt.executeUpdate();
             //
-            JOptionPane.showMessageDialog(null, "Update the Customer!");
+            JOptionPane.showMessageDialog(null,
+                    "Update the Customer!",
+                    "Successfull Updated",
+                    JOptionPane.INFORMATION_MESSAGE);
             liatSiapAja();  // Refresh tabel setelah mengedit products
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,
@@ -686,7 +690,10 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
             stmt.setInt(1, id);
             stmt.executeUpdate();
             //
-            JOptionPane.showMessageDialog(null, "Deleting the Costumer!");
+            JOptionPane.showMessageDialog(null,
+                    "Deleting the Costumer!",
+                    "Successfull Deleted",
+                    JOptionPane.INFORMATION_MESSAGE);
             liatSiapAja();  // Refresh tabel setelah menghapus products
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,
