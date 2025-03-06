@@ -149,7 +149,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="judulServis" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="kendaliServis" pref="680" max="32767" attributes="0"/>
+                              <Component id="kendaliServis" pref="630" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="opsiKeServis" min="-2" max="-2" attributes="0"/>

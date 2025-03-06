@@ -183,6 +183,7 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
         liatMesan.setForeground(new java.awt.Color(204, 204, 204));
         liatMesan.setText("Refresh");
         liatMesan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        liatMesan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         liatMesan.setMaximumSize(new java.awt.Dimension(150, 40));
         liatMesan.setMinimumSize(new java.awt.Dimension(150, 40));
         liatMesan.setPreferredSize(new java.awt.Dimension(150, 40));
@@ -201,6 +202,7 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
         sigInvite.setPreferredSize(new java.awt.Dimension(150, 40));
 
         isiNgundang.setFont(new java.awt.Font("Minecraft", 0, 20)); // NOI18N
+        isiNgundang.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         isiNgundang.setMaximumSize(new java.awt.Dimension(150, 40));
         isiNgundang.setMinimumSize(new java.awt.Dimension(150, 40));
         isiNgundang.setPreferredSize(new java.awt.Dimension(150, 40));
@@ -215,6 +217,7 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
         inviTon.setForeground(new java.awt.Color(0, 153, 0));
         inviTon.setText(">");
         inviTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        inviTon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         inviTon.setMaximumSize(new java.awt.Dimension(60, 60));
         inviTon.setMinimumSize(new java.awt.Dimension(60, 60));
         inviTon.setPreferredSize(new java.awt.Dimension(60, 60));
@@ -229,6 +232,7 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
         minList.setForeground(new java.awt.Color(153, 153, 153));
         minList.setText("-");
         minList.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        minList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         minList.setMaximumSize(new java.awt.Dimension(60, 60));
         minList.setMinimumSize(new java.awt.Dimension(60, 60));
         minList.setPreferredSize(new java.awt.Dimension(60, 60));
@@ -243,6 +247,7 @@ public final class CustomerOrderDisplay extends javax.swing.JInternalFrame {
         tandaBayar.setForeground(new java.awt.Color(204, 204, 204));
         tandaBayar.setText("Completion");
         tandaBayar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        tandaBayar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         tandaBayar.setMaximumSize(new java.awt.Dimension(200, 40));
         tandaBayar.setMinimumSize(new java.awt.Dimension(200, 40));
         tandaBayar.setPreferredSize(new java.awt.Dimension(200, 40));

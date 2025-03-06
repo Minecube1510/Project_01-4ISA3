@@ -698,16 +698,26 @@ public final class AdminStuffDisplay extends javax.swing.JInternalFrame {
             return;
         }
 
+        if (enterProname.getText().trim().isEmpty() || 
+            enterStockn.getText().trim().isEmpty() || 
+            enterPricen.getText().trim().isEmpty()) {
+
+            JOptionPane.showMessageDialog(null,
+                "Name, Stock, and Price must be filled!",
+                "Unfilled Text",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         // Ambil ID lama dari tabel
         int lamaId = (int) isiDataan.getValueAt(selectedRow, 0);
         int stock = Integer.parseInt(enterStockn.getText().trim());
         String deskrips = enterDescs.getText().trim();
+        long aturkaya = Long.parseLong(enterPricen.getText().trim());
+        //
         boolean updateDesc = !deskrips.isEmpty(); // Cek apakah deskripsi diisi
 
         try {
-            // Validasi input numerik
-            long aturkaya = Long.parseLong(enterPricen.getText().trim());
-
             // Bangun query dinamis
             StringBuilder kueri = new StringBuilder("UPDATE " + 
                     "product" + " SET " + "pro_name = ?, category = ?, stock = ?, price = ?");

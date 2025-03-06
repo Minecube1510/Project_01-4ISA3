@@ -199,6 +199,7 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
         alliatPesan.setForeground(new java.awt.Color(204, 204, 204));
         alliatPesan.setText("Refresh");
         alliatPesan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        alliatPesan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         alliatPesan.setMaximumSize(new java.awt.Dimension(150, 50));
         alliatPesan.setMinimumSize(new java.awt.Dimension(150, 50));
         alliatPesan.setPreferredSize(new java.awt.Dimension(150, 50));
@@ -213,6 +214,7 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
         bayarTon.setForeground(new java.awt.Color(204, 204, 204));
         bayarTon.setText("Payment");
         bayarTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        bayarTon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bayarTon.setMaximumSize(new java.awt.Dimension(150, 50));
         bayarTon.setMinimumSize(new java.awt.Dimension(150, 50));
         bayarTon.setPreferredSize(new java.awt.Dimension(150, 50));
@@ -339,6 +341,7 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
         if (deliveryArea == null) return; // User canceled
 
         // 3. Hitung biaya pengiriman
+        // [IN = 2%] [OUT = 5%]
         long shippingPercentage = (long) (deliveryArea.equals("In Jabodetabek") ? 2L : 5L);
 
         try {
@@ -361,8 +364,8 @@ public final class CustomerReserveDisplay extends javax.swing.JInternalFrame {
                         String confirmMsg;
                         confirmMsg = String.format("""
                                                    Confirm Payment with %s?
-                                                   Payment Pricing: %d%% (Rp%,d)
-                                                   Totaling: Rp%,d""",
+                                                   Payment Pricing: %d%% (Rp. %,d)
+                                                   Totaling: Rp. %,d""",
                                 paymentMethod,
                                 shippingPercentage, // %d untuk long
                                 shippingCost,

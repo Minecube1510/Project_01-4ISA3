@@ -15,7 +15,10 @@ package Ab_NextFrame_ReSource.B_Frame_Customer;
  //
 import D_Funcer_ReSource.MegangData;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,7 +29,9 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.KeyStroke;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.table.DefaultTableModel;
 // File Sistematik //
 
 // Nyari File lain //
@@ -64,6 +69,36 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
 
     public CustomerMenuDisplay() {
         initComponents();
+        
+        tabelHarga.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        // [1] Aktifkan seleksi per sel & non-aktifkan seleksi baris
+        tabelHarga.setCellSelectionEnabled(true); // Bisa pilih per sel
+        tabelHarga.setRowSelectionAllowed(false); // Matikan seleksi baris <-- KUNCI!
+        tabelHarga.setColumnSelectionAllowed(false);
+
+        // [2] Hapus binding default CTRL+C yang menyalin baris
+        tabelHarga.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK), "none");
+        
+        // Handler untuk CTRL+C
+        tabelHarga.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.isControlDown() && evt.getKeyCode() == java.awt.event.KeyEvent.VK_C) {
+                    kopasTabelan(true);
+                }
+            }
+        });
+
+        // Handler untuk double-click
+        tabelHarga.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                if (evt.getClickCount() == 2) { // Deteksi double click
+                    kopasTabelan(false);
+                }
+            }
+        });
 
         try {
             koneksi = DriverManager.getConnection(url, user, pass);
@@ -103,6 +138,51 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         
         //
 
+    }
+
+    // Method untuk menyalin data
+    private void kopasTabelan(boolean isCtrlC) {
+        if (isCtrlC) {
+            // Ambil sel yang aktif
+            int row = tabelHarga.getSelectedRow();
+            int col = tabelHarga.getSelectedColumn();
+
+            // Pastikan ada sel yang dipilih
+            if (row != -1 && col != -1) {
+                Object value = tabelHarga.getValueAt(row, col);
+                String cleanedValue = (value != null) ? value.toString().trim() : "";
+
+                // Salin ke clipboard
+                StringSelection ss = new StringSelection(cleanedValue);
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+            }
+        } else {
+            // Logika untuk menyalin seluruh baris
+            int[] selectedRows = tabelHarga.getSelectedRows();
+            int[] selectedCols = tabelHarga.getSelectedColumns();
+
+            StringBuilder data = new StringBuilder();
+
+            for (int row : selectedRows) {
+                StringBuilder rowData = new StringBuilder();
+                for (int col : selectedCols) {
+                    Object value = tabelHarga.getValueAt(row, col);
+                    // Hilangkan spasi/karakter aneh & pastikan tidak null
+                    String cleanedValue = (value != null) ? value.toString().trim() : "";
+                    rowData.append(cleanedValue).append("\t"); 
+                }
+                // Hapus tab terakhir di setiap baris + tambahkan newline
+                String finalRow = rowData.toString().replaceAll("\t$", "") + "\n";
+                data.append(finalRow);
+            }
+
+            // Hapus newline terakhir jika ada
+            String finalData = data.toString().replaceAll("\n$", "");
+
+            // Salin ke clipboard
+            StringSelection ss = new StringSelection(finalData);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+        }
     }
 
     public void tambahData(String nama, String telp) {
@@ -226,6 +306,13 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         hapusNoted = new javax.swing.JButton();
         skrolMinta = new javax.swing.JScrollPane();
         daftarMinta = new javax.swing.JList<>();
+        ripresListHarga = new javax.swing.JButton();
+        skrolHarga = new javax.swing.JScrollPane();
+        tabelHarga = new javax.swing.JTable();
+        perIngatAnN = new javax.swing.JLabel();
+        perIngatAnS = new javax.swing.JLabel();
+        jabodetabekIn = new javax.swing.JLabel();
+        jabodetabekOut = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -253,15 +340,16 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
 
         skrolPesanan.setBackground(new java.awt.Color(51, 51, 51));
         skrolPesanan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        skrolPesanan.setHorizontalScrollBar(null);
-        skrolPesanan.setMaximumSize(new java.awt.Dimension(570, 325));
-        skrolPesanan.setMinimumSize(new java.awt.Dimension(570, 325));
-        skrolPesanan.setPreferredSize(new java.awt.Dimension(570, 325));
+        skrolPesanan.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        skrolPesanan.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        skrolPesanan.setMaximumSize(new java.awt.Dimension(600, 340));
+        skrolPesanan.setMinimumSize(new java.awt.Dimension(600, 340));
+        skrolPesanan.setPreferredSize(new java.awt.Dimension(600, 340));
 
         kotakMesen.setBackground(new java.awt.Color(153, 0, 102));
-        kotakMesen.setMaximumSize(new java.awt.Dimension(570, 325));
-        kotakMesen.setMinimumSize(new java.awt.Dimension(570, 325));
-        kotakMesen.setPreferredSize(new java.awt.Dimension(570, 325));
+        kotakMesen.setMaximumSize(new java.awt.Dimension(1000, 400));
+        kotakMesen.setMinimumSize(new java.awt.Dimension(1000, 400));
+        kotakMesen.setPreferredSize(new java.awt.Dimension(1000, 400));
 
         aturMintaReq.setBackground(new java.awt.Color(153, 0, 204));
         aturMintaReq.setFont(new java.awt.Font("Rockwell", 1, 12)); // NOI18N
@@ -284,9 +372,9 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         catatAn.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         catatAn.setForeground(new java.awt.Color(102, 102, 102));
         catatAn.setMargin(new java.awt.Insets(-100, 6, 2, 6));
-        catatAn.setMaximumSize(new java.awt.Dimension(370, 140));
-        catatAn.setMinimumSize(new java.awt.Dimension(370, 140));
-        catatAn.setPreferredSize(new java.awt.Dimension(370, 140));
+        catatAn.setMaximumSize(new java.awt.Dimension(370, 150));
+        catatAn.setMinimumSize(new java.awt.Dimension(370, 150));
+        catatAn.setPreferredSize(new java.awt.Dimension(370, 150));
         catatAn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 catatAnActionPerformed(evt);
@@ -365,54 +453,1129 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         daftarMinta.setPreferredSize(new java.awt.Dimension(250, 300));
         skrolMinta.setViewportView(daftarMinta);
 
+        ripresListHarga.setBackground(new java.awt.Color(102, 102, 102));
+        ripresListHarga.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        ripresListHarga.setForeground(new java.awt.Color(204, 204, 204));
+        ripresListHarga.setText("Refresh");
+        ripresListHarga.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ripresListHarga.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ripresListHarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ripresListHargaActionPerformed(evt);
+            }
+        });
+
+        skrolHarga.setBackground(new java.awt.Color(0, 255, 255));
+        skrolHarga.setForeground(new java.awt.Color(102, 0, 102));
+        skrolHarga.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        skrolHarga.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        skrolHarga.setMaximumSize(new java.awt.Dimension(350, 200));
+        skrolHarga.setMinimumSize(new java.awt.Dimension(350, 200));
+        skrolHarga.setPreferredSize(new java.awt.Dimension(350, 200));
+
+        tabelHarga.setBackground(new java.awt.Color(102, 0, 102));
+        tabelHarga.setForeground(new java.awt.Color(0, 255, 255));
+        tabelHarga.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Order", "Price"
+            }
+        ));
+        tabelHarga.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        skrolHarga.setViewportView(tabelHarga);
+
+        perIngatAnN.setFont(new java.awt.Font("Minecraft", 1, 10)); // NOI18N
+        perIngatAnN.setForeground(new java.awt.Color(0, 255, 255));
+        perIngatAnN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        perIngatAnN.setText("Postage");
+
+        perIngatAnS.setFont(new java.awt.Font("Minecraft", 1, 10)); // NOI18N
+        perIngatAnS.setForeground(new java.awt.Color(0, 255, 255));
+        perIngatAnS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        perIngatAnS.setText(" Interest");
+
+        jabodetabekIn.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 30)); // NOI18N
+        jabodetabekIn.setForeground(new java.awt.Color(0, 255, 255));
+        jabodetabekIn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jabodetabekIn.setText("In Jabodetabek (2%)");
+
+        jabodetabekOut.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 30)); // NOI18N
+        jabodetabekOut.setForeground(new java.awt.Color(0, 255, 255));
+        jabodetabekOut.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jabodetabekOut.setText("Out Jabodetabek (5%)");
+
         javax.swing.GroupLayout kotakMesenLayout = new javax.swing.GroupLayout(kotakMesen);
         kotakMesen.setLayout(kotakMesenLayout);
         kotakMesenLayout.setHorizontalGroup(
             kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(kotakMesenLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kotakMesenLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kotakMesenLayout.createSequentialGroup()
-                        .addComponent(skrolMinta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(aturMintaReq, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deskripKan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(kotakMesenLayout.createSequentialGroup()
+                        .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(skrolMinta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(perIngatAnN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(perIngatAnS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jabodetabekIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(kotakMesenLayout.createSequentialGroup()
-                                .addComponent(pilihPesan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(pilihPesan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(addOkeh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(hapusNoted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(kotakMesenLayout.createSequentialGroup()
-                                .addComponent(catatAn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(kotakMesenLayout.createSequentialGroup()
-                        .addComponent(aturMintaReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(deskripKan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(hapusNoted, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(catatAn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jabodetabekOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(skrolHarga, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                    .addComponent(ripresListHarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         kotakMesenLayout.setVerticalGroup(
             kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(kotakMesenLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(aturMintaReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deskripKan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(kotakMesenLayout.createSequentialGroup()
-                        .addComponent(catatAn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(9, 9, 9)
+                        .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(aturMintaReq, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deskripKan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(skrolMinta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(kotakMesenLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(ripresListHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(hapusNoted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(pilihPesan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(addOkeh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(skrolMinta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44))
+                            .addComponent(skrolHarga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(kotakMesenLayout.createSequentialGroup()
+                                .addComponent(catatAn, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(addOkeh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                    .addComponent(hapusNoted, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(pilihPesan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kotakMesenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jabodetabekIn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jabodetabekOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(kotakMesenLayout.createSequentialGroup()
+                        .addComponent(perIngatAnN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(perIngatAnS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18))
         );
 
         deskripKan.setEditable(false);
+        skrolHarga.getAccessibleContext().setAccessibleName("");
 
         skrolPesanan.setViewportView(kotakMesen);
 
@@ -420,19 +1583,19 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         bekgronDisple.setLayout(bekgronDispleLayout);
         bekgronDispleLayout.setHorizontalGroup(
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(welKoMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(skrolPesanan, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(welKoMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(skrolPesanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(9, 9, 9))
         );
         bekgronDispleLayout.setVerticalGroup(
             bekgronDispleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bekgronDispleLayout.createSequentialGroup()
                 .addComponent(welKoMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(skrolPesanan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addComponent(skrolPesanan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -679,7 +1842,7 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this,
                     "Successfully saving the Notes!",
                     "Successfully Added",
-                    JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this,
                     "Failed saving the Notes...",
@@ -694,6 +1857,33 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_addOkehActionPerformed
 
+    private void ripresListHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ripresListHargaActionPerformed
+        try (Connection koneksi = DriverManager.getConnection(url, user, pass)) {
+            String kueri = "SELECT pro_name, price FROM product";
+            PreparedStatement stmt = koneksi.prepareStatement(kueri);
+            ResultSet rs = stmt.executeQuery();
+
+            DefaultTableModel model = new DefaultTableModel(new String[]{"Order", "Price"}, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // Matikan edit sel
+                }
+            };
+
+            while (rs.next()) {
+                String proName = rs.getString("pro_name");
+                long price = rs.getLong("price");
+                model.addRow(new Object[]{proName, price});
+            }
+            tabelHarga.setModel(model);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Database Error: " + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_ripresListHargaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addOkeh;
@@ -703,10 +1893,17 @@ public final class CustomerMenuDisplay extends javax.swing.JInternalFrame {
     private javax.swing.JList<String> daftarMinta;
     private javax.swing.JTextField deskripKan;
     private javax.swing.JButton hapusNoted;
+    private javax.swing.JLabel jabodetabekIn;
+    private javax.swing.JLabel jabodetabekOut;
     private javax.swing.JPanel kotakMesen;
+    private javax.swing.JLabel perIngatAnN;
+    private javax.swing.JLabel perIngatAnS;
     private javax.swing.JButton pilihPesan;
+    private javax.swing.JButton ripresListHarga;
+    private javax.swing.JScrollPane skrolHarga;
     private javax.swing.JScrollPane skrolMinta;
     private javax.swing.JScrollPane skrolPesanan;
+    private javax.swing.JTable tabelHarga;
     private javax.swing.JLabel welKoMenu;
     // End of variables declaration//GEN-END:variables
 }

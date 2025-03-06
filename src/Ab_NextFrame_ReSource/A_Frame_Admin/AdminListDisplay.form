@@ -236,7 +236,7 @@
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Edit"/>
-            <Property name="toolTipText" type="java.lang.String" value="Fix Button"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -272,7 +272,7 @@
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Remove"/>
-            <Property name="toolTipText" type="java.lang.String" value="Delete Button"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>

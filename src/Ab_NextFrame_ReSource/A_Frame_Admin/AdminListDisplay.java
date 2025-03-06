@@ -240,7 +240,7 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
         upDateTon.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
         upDateTon.setForeground(new java.awt.Color(204, 204, 204));
         upDateTon.setText("Edit");
-        upDateTon.setToolTipText("Fix Button");
+        upDateTon.setToolTipText("");
         upDateTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         upDateTon.setMaximumSize(new java.awt.Dimension(100, 30));
         upDateTon.setMinimumSize(new java.awt.Dimension(100, 30));
@@ -255,7 +255,7 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
         deleTon.setFont(new java.awt.Font("Microsoft YaHei UI", 1, 16)); // NOI18N
         deleTon.setForeground(new java.awt.Color(204, 204, 204));
         deleTon.setText("Remove");
-        deleTon.setToolTipText("Delete Button");
+        deleTon.setToolTipText("");
         deleTon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         deleTon.setMaximumSize(new java.awt.Dimension(100, 30));
         deleTon.setMinimumSize(new java.awt.Dimension(100, 30));
@@ -541,12 +541,26 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
 
         String numb = "";
         //
-        if (!numbAdd.matches("\\d{12}")) {
+        if (!numbAdd.matches("\\d{10,12}")) {
             JOptionPane.showMessageDialog(null,
-                    "Telephone must be 12 number digits, and no Spaces",
+                    "Telephone must be 10-12 number digits, and no Spaces!",
                     "Non-Number Typed",
                     JOptionPane.WARNING_MESSAGE);
+            //
             return; // Keluar dari metode jika input tidak valid
+        }
+
+        // Konfirmasi SETELAH validasi
+        int confirm = JOptionPane.showConfirmDialog(null,
+                """
+                Adding Customer?
+                Name: """ + " " + nameAdd + "\n" +
+                "Telp: " + numbAdd,
+                "Adding Customer Data",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
         }
 
         try {
@@ -607,9 +621,9 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
             }
         }
 
-        String aidi = enterNid.getText();
-        String name = enterName.getText();
-        String numb = enterNumb.getText();
+        String aidi = enterNid.getText().trim();
+        String name = enterName.getText().trim();
+        String numb = enterNumb.getText().trim();
         
         // Validasi input
         if (name.isEmpty() || numb.isEmpty()) {
@@ -621,12 +635,22 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
             return; // Keluar dari metode jika ada field yang kosong
         }
 
-        if (!numb.matches("\\d{12}") && !aidie.matches("\\d")) {
+        if (!numb.matches("\\d{10,12}")) {
             JOptionPane.showMessageDialog(null,
-                    "Telephone must be 12 number digits",
+                    "Telephone must be 10-12 number digits, and no Spaces!",
                     "Under digit Phone Number",
                     JOptionPane.WARNING_MESSAGE);
             return; // Keluar dari metode jika input tidak valid
+        }
+
+        // Konfirmasi SETELAH validasi
+        int confirm = JOptionPane.showConfirmDialog(null,
+                "Want to Update it?", 
+                "Update Customer Data",
+                JOptionPane.YES_NO_OPTION);
+
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
         }
 
         // Ambil ID lama dari tabel
@@ -675,6 +699,15 @@ public final class AdminListDisplay extends javax.swing.JInternalFrame {
                     "Choose who you wanna delete!",
                     "Unchoosen Table",
                     JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(null,
+                "Are you sure want to delete?",
+                "Adding Customer Data",
+                JOptionPane.YES_NO_OPTION);
+        //
+        if (confirm != JOptionPane.YES_OPTION) {
             return;
         }
 
